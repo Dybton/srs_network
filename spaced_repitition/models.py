@@ -10,3 +10,6 @@ class Card(models.Model):
     answer = models.TextField()
     date = models.DateTimeField(default=timezone.now)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.question

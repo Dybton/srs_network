@@ -1,0 +1,18 @@
+{% extends "spaced_repitition/base.html" %}
+{%  block content %}
+
+  <div class="content-section">
+    <form method="POST">
+      {% csrf_token %}
+      <fieldset class=form-group>
+        <legend class="borders-bottom mb-4"> Delete Card </legend>
+        <h2> Are you sure you want to delete the post?  {{ object.question }} </h2>
+      <div class=form-group>
+        <button class= "btn btn-outline-danger" type="submit"> Yes, Delete </button>
+        <a class= "btn btn-outline-secondary" href="{% url 'card-detail' object.id %}"> Cancel </button>
+      </div>
+      </fieldset>
+    </form>
+
+
+{% endblock content %}

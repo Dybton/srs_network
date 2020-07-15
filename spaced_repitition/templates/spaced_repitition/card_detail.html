@@ -6,6 +6,12 @@
         <div class="article-metadata">
           <a class="mr-2" href="#">{{ object.creator }}</a>
           <small class="text-muted">{{ object.date }}</small>
+          {% if object.creator == user %}
+            <div>
+              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'card-update' object.id %}"> Update </a>
+              <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'card-delete' object.id %}"> Delete </a>
+            </div>
+          {% endif %}
         </div>
             <h2 class="article-title">{{ object.question }}</h2>
             <p class="article-content">{{ object.answer}}</p>
