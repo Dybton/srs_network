@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from . models import Card
+from . models import Card, Deck, User
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -69,5 +71,17 @@ class CardDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return reverse('spaced_repitition-home')
 
 
+@login_required(login_url="/login")
 def mypage(request):
-    return render(request, 'spaced_repitition/mypage.html')
+    current_user = request.user
+    context = {
+        # Here I need to filter, so I only show our own decks
+        # I need to get the id for the creator
+        'decks': Deck.objects.filter(creator_id=current_user.id)
+    }
+    return render(request, 'spaced_repitition/mypage.html', context)
+
+    # return render(request, 'content/details.html', {'content': content, 'reviews': Review.objects.filter(content_id=content_id)})
+
+# Deck.objects.filter()
+# Review.objects.filter(content_id=content_id)
