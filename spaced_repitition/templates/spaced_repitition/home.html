@@ -1,5 +1,6 @@
 {% extends "spaced_repitition/base.html" %}
 
+
 <style>
     .my-container {
         border: 1px solid green;
@@ -24,6 +25,7 @@
 
 {% block content %}
 
+
 </br>
 </br>
 
@@ -46,8 +48,9 @@
             <div class="card-body">
               <h5 class="card-title"> <a class="article-title" href="{% url 'card-detail' card.id %}">{{ card.question }}</a></h5>
               <p class="card-text"> {{ card.answer}} </p>
+              <span class="oi oi-arrow-left btn"></span>
               <a href="#" class="btn btn-primary">Click to See Answer</a>
-              <span class="oi oi-arrow-left"></span>
+              <span class="oi oi-arrow-right btn"></span>
 
             </div>
             <div class="card-footer text-muted">
