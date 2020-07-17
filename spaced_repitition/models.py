@@ -19,6 +19,7 @@ class Card(models.Model):
     answer = models.TextField()
     date = models.DateTimeField(default=timezone.now)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    # Tror måske, at jeg skal gøre denne til en one to many? Og så genere et nyt id til hvert kort der bliver ændret - eller hvad? Men hvad nu hvis personen redigerer i kortet?
     decks = models.ManyToManyField(Deck)
 
     def __str__(self):

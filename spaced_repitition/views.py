@@ -9,13 +9,6 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 
-def home(request):
-    context = {
-        'cards': Card.objects.all()
-    }
-    return render(request, 'spaced_repitition/home.html', context)
-
-
 class CardListView(ListView):
     model = Card
     template_name = 'spaced_repitition/home.html'
@@ -30,6 +23,18 @@ class CardDetailView(DetailView):
 class CardCreateView(LoginRequiredMixin, CreateView):
     model = Card
     fields = ['question', 'answer']
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('spaced_repitition-home')
+
+
+class DeckCreateView(LoginRequiredMixin, CreateView):
+    model = Deck
+    fields = ['title']
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
