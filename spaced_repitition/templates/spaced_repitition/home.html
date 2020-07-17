@@ -1,14 +1,93 @@
 {% extends "spaced_repitition/base.html" %}
 
-{%  block content %}
+<style>
+    .my-container {
+        border: 1px solid green;
+    }
+
+    .my-row {
+        border: 3px solid red;
+    }
+
+    .my-column {
+        border: 3px dotted blue;
+    }
+
+    .my-container2 {
+        border-left: 1px solid green;
+        border-top: 1px solid green;
+        border-right: 1px solid green;
+        border-radius: 15px 15px 0px 0px;
+    }
+
+</style>
+
+{% block content %}
+
+</br>
+</br>
+
+
+
 <body>
+  <section>
+    <div class="container my-container">
+      <div class="row my-row">
+        <div class="col-6 offset-2 my-column">
+          {% for card in cards %}
+
+          <div class="card">
+            <div class="card-header">
+              <img class = "large-profile-picture" src = "{{ card.creator.profile.image.url }}">
+              <a class="mr-2" href="#">{{ card.creator }}</a>
+              <p> {{ card.date }} </p>
+              <p> Add to Deck </p>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"> <a class="article-title" href="{% url 'card-detail' card.id %}">{{ card.question }}</a></h5>
+              <p class="card-text"> {{ card.answer}} </p>
+              <a href="#" class="btn btn-primary">Click to See Answer</a>
+              <span class="oi oi-arrow-left"></span>
+
+            </div>
+            <div class="card-footer text-muted">
+              <p> 57 added to deck </p>
+              <p> 1/9 cards </p>
+
+            </div>
+          </div>
+            </br>
+          {% endfor %}
+        </div>
+        <div class="col-md-4 my-column mt-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Press here to study cards</h5>
+              <a href="#" class="btn btn-success">Study 57 cards</a>
+
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+      </div>
+
+    </div>
+  </section>
+</body>
+
+{% endblock content %}
+
 </br>
 </br>
 </br>
-    {% for card in cards %}
+
+
+
+{% for card in cards %}
 
       <article class="media content-section">
-        <img class = "rounded-circle article-img" src = "{{ card.creator.profile.image.url }}"
+        <img class = "rounded-circle article-img" src = "{{ card.creator.profile.image.url }}">
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" href="#">{{ card.creator }}</a>
@@ -21,8 +100,7 @@
 
 
     {% endfor %}
-</body>
-{% endblock content %}
+
 
 
 
