@@ -41,7 +41,7 @@ class DeckCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('spaced_repitition-home')
+        return reverse('spaced_repitition-mypage')
 
 
 class CardUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -79,14 +79,30 @@ class CardDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 @login_required(login_url="/login")
 def mypage(request):
     current_user = request.user
+    deck_title = 'History'
     context = {
-        # Here I need to filter, so I only show our own decks
-        # I need to get the id for the creator
-        'decks': Deck.objects.filter(creator_id=current_user.id)
+        'decks': Deck.objects.filter(creator_id=current_user.id), 'cards': Card.objects.filter(decks__title=deck_title)
     }
+    # context2 = {
+    #     # Here I need to filter, so I only show our own decks
+    #     # I need to get the id for the creator
+
+    # }
     return render(request, 'spaced_repitition/mypage.html', context)
 
     # return render(request, 'content/details.html', {'content': content, 'reviews': Review.objects.filter(content_id=content_id)})
 
-# Deck.objects.filter()
-# Review.objects.filter(content_id=content_id)
+
+@login_required(login_url="/login")
+def mypage_study(request):
+    current_user = request.user
+    deck_title = 'History'
+    context = {
+        'decks': Deck.objects.filter(creator_id=current_user.id), 'cards': Card.objects.filter(decks__title=deck_title)
+    }
+    # context2 = {
+    #     # Here I need to filter, so I only show our own decks
+    #     # I need to get the id for the creator
+
+    # }
+    return render(request, 'spaced_repitition/mypage.html', context)

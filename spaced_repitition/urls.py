@@ -11,5 +11,6 @@ urlpatterns = [
     path('card/new/', CardCreateView.as_view(), name='card-create'),
     path('deck/new/', DeckCreateView.as_view(), name='deck-create'),
     path('mypage/', views.mypage, name='spaced_repitition-mypage'),
+    path('mypage/<int:pk>', views.mypage_study, name='spaced_repitition-mypage-study'), #Note, istedet for pk, vil jeg gerne have navntet på decket ind (men hvad gavner det?)
 
 ]
