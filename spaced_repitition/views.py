@@ -79,7 +79,7 @@ class CardDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 @login_required(login_url="/login")
 def mypage(request):
     current_user = request.user
-    deck_title = 'History'
+    deck_title = 'History'  # This is where I need to get the deck I press
     context = {
         'decks': Deck.objects.filter(creator_id=current_user.id), 'cards': Card.objects.filter(decks__title=deck_title)
     }
@@ -93,16 +93,19 @@ def mypage(request):
     # return render(request, 'content/details.html', {'content': content, 'reviews': Review.objects.filter(content_id=content_id)})
 
 
-@login_required(login_url="/login")
-def mypage_study(request):
-    current_user = request.user
-    deck_title = 'History'
-    context = {
-        'decks': Deck.objects.filter(creator_id=current_user.id), 'cards': Card.objects.filter(decks__title=deck_title)
-    }
-    # context2 = {
-    #     # Here I need to filter, so I only show our own decks
-    #     # I need to get the id for the creator
+# @login_required(login_url="/login")
+# def mypage_study(request):
+#     current_user = request.user
+#     deck_title = 'History'
+#     context = {
+#         'decks': Deck.objects.filter(creator_id=current_user.id), 'cards': Card.objects.filter(decks__title=deck_title)
+#     }
+#     # context2 = {
+#     #     # Here I need to filter, so I only show our own decks
+#     #     # I need to get the id for the creator
 
-    # }
-    return render(request, 'spaced_repitition/mypage.html', context)
+#     # }
+#     return render(request, 'spaced_repitition/mypage.html', context)
+
+
+# How can I pass the title of this deck into the deck title.
