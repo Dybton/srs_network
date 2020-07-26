@@ -30,7 +30,6 @@
 </br>
 
 
-
 <body>
   <section>
     <div class="container my-container">
@@ -43,7 +42,23 @@
               <img class = "large-profile-picture" src = "{{ card.creator.profile.image.url }}">
               <a class="mr-2" href="#">{{ card.creator }}</a>
               <p> {{ card.date }} </p>
-              <p> Add to Deck </p>
+
+              <button type="button" class="btn"> </button>
+
+              <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Add to Deck
+                </button>
+<!--                 So here we need a loop that shows all the differnet decks the speciifc user has.
+ -->
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  {% for deck in decks reversed %}
+                  <a class="dropdown-item" href="#"> {{ deck.title }} </a>
+
+                  {% endfor %}
+                </div>
+              </div>
             </div>
             <div class="card-body">
               <h5 class="card-title"> <a class="article-title" href="{% url 'card-detail' card.id %}">{{ card.question }}</a></h5>

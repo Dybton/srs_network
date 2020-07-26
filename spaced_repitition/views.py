@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+
 # Create your views here.
 
 
@@ -13,7 +14,34 @@ class CardListView(ListView):
     model = Card
     template_name = 'spaced_repitition/home.html'
     context_object_name = 'cards'
-    ordering = ['-date']
+    ordering = ['date']
+
+    def get_context_data(self, *args, **kwargs):
+
+        context = super(CardListView, self).get_context_data(*args, **kwargs)
+        context['decks'] = Deck.objects.filter(creator=self.request.user)
+
+        return context
+
+    # def copy_card_to_deck(self, *args, **kwargs): #How do we call this function within our code?
+    #     obj = Foo.objects.get(pk= < some_existing_pk > )  # Here we need to get the card object we are interested in
+    #     obj.pk = None  # Then we set the pk to zero
+    #     # Here we need to get the new deck and then save it to it.
+    #     obj.save()  # We save the object, which genreates a new pk
+
+        # Can I call the card create view, and then use that for creating a new card in the other deck?
+        # Is it easier to create a new view?
+
+        # Here we need to pass in the decks that the logged on user have access to
+
+        # So here we need the deck titles, but we need to filter them based on the user.
+
+        # def get_context_data(self, *args, **kwargs):
+        #     deck = self.get_object()
+        #     deck_title = deck.title
+        #     context = super(DeckDetailView, self).get_context_data(*args, **kwargs)
+        #     context['cards'] = Card.objects.filter(decks__title=deck_title)
+        #     return context
 
 
 class CardDetailView(DetailView):
@@ -75,37 +103,48 @@ class CardDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def get_success_url(self):
         return reverse('spaced_repitition-home')
 
+# @login_required(login_url="/login")
+# def mypage(request):
+#     current_user = request.user
+#     deck_title = 'History'  # This is where I need to get the deck I press
+#     context = {
+#         'decks': Deck.objects.filter(creator_id=current_user.id),
+#     }
 
-@login_required(login_url="/login")
-def mypage(request):
-    current_user = request.user
-    deck_title = 'History'  # This is where I need to get the deck I press
-    context = {
-        'decks': Deck.objects.filter(creator_id=current_user.id), 'cards': Card.objects.filter(decks__title=deck_title)
-    }
-    # context2 = {
-    #     # Here I need to filter, so I only show our own decks
-    #     # I need to get the id for the creator
-
-    # }
-    return render(request, 'spaced_repitition/mypage.html', context)
-
-    # return render(request, 'content/details.html', {'content': content, 'reviews': Review.objects.filter(content_id=content_id)})
-
+#     return render(request, 'spaced_repitition/mypage.html', context)
 
 # @login_required(login_url="/login")
-# def mypage_study(request):
+# def mypage_study_deck(request):
 #     current_user = request.user
-#     deck_title = 'History'
+#     deck_title = "History"  # I need to get the deck_title here.
+#     deck = Deck()
 #     context = {
 #         'decks': Deck.objects.filter(creator_id=current_user.id), 'cards': Card.objects.filter(decks__title=deck_title)
 #     }
-#     # context2 = {
-#     #     # Here I need to filter, so I only show our own decks
-#     #     # I need to get the id for the creator
-
-#     # }
-#     return render(request, 'spaced_repitition/mypage.html', context)
+#     return render(request, 'spaced_repitition/mypage_study_deck.html', context)
 
 
-# How can I pass the title of this deck into the deck title.
+class DeckListView(LoginRequiredMixin, ListView):
+    model = Deck
+    template_name = 'spaced_repitition/mypage.html'
+    context_object_name = 'decks'
+    ordering = ['-date']
+
+    def get_queryset(self):
+        return Deck.objects.filter(creator=self.request.user)
+
+
+class DeckDetailView(LoginRequiredMixin, DetailView):
+    model = Deck
+
+    def get_context_data(self, *args, **kwargs):
+        deck = self.get_object()
+        deck_title = deck.title
+        context = super(DeckDetailView, self).get_context_data(*args, **kwargs)
+        context['cards'] = Card.objects.filter(decks__title=deck_title)
+        return context
+
+        # On click I could increment the list,
+        # I could then display the list starting with the first one
+        # I might need the post fucntino - to do: Read up in this
+        #
