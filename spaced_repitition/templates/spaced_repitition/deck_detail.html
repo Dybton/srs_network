@@ -4,7 +4,11 @@
 
 </br>  </br> </br> </br>
 
-{{ deck.title }}
+<h1> {{ deck.title }} </h1>
+</br>
+
+<!-- Here we pass along the cards that belong to the specific deck
+ -->
 
 {% for card in cards reversed %}
             <div class="my-column
@@ -12,17 +16,32 @@
                 <div class="card">
                   <div class="card-body">
                     <h5 class="card-title"> {{card.question}} </h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text">  </p>
                         <a href="{% url 'mypage-study-deck' deck.id %}">
-                            <button type="button" class="btn btn-success">
-                              Study this Deck
-                            </button>
+
+<!--                           Here we add the collapse functionality for the button
+ -->
+                          <p>
+                            <a class="btn btn-success" data-toggle="collapse" href="#{{card.id}}"  role="button" aria-expanded="false" aria-controls="{{card.id}}">
+                              See Answer
+                            </a>
+
+                          </p>
+                          <div class="collapse" id="{{card.id}}">
+                            <div class="card card-body">
+                              <p> {{card.answer}} </p>
+                            </div>
+                          </div>
                   </div>
                 </div>
             </div>
         {% endfor %}
 
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+
+
+
+       <!--  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -47,7 +66,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>
+</div> -->
 
 {% endblock content %}
 

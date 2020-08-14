@@ -14,14 +14,31 @@ class CardListView(ListView):
     model = Card
     template_name = 'spaced_repitition/home.html'
     context_object_name = 'cards'
-    ordering = ['date']
+    ordering = ['-date']
 
     def get_context_data(self, *args, **kwargs):
-
         context = super(CardListView, self).get_context_data(*args, **kwargs)
         context['decks'] = Deck.objects.filter(creator=self.request.user)
 
         return context
+
+    def copy_card(self, request, pk):
+        card = self.get_object()
+        deck = request.POST.get("deck_pk")
+        card.decks.add(deck)
+        print(card)
+
+        return redirect('home')
+
+    # def post(self, request, *args, **kwargs):
+    #     name = request.POST.get("pk")
+    #     product = Product.objects.get(pk=pk)
+
+    # I need to use the update view I allready have and call it here.
+
+    # Associate the Card with the new Publication:
+        # card.decks.add(deck_3) I need to use this one.
+        # I might need the get method here
 
     # def copy_card_to_deck(self, *args, **kwargs): #How do we call this function within our code?
     #     obj = Foo.objects.get(pk= < some_existing_pk > )  # Here we need to get the card object we are interested in

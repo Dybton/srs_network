@@ -54,7 +54,11 @@
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   {% for deck in decks reversed %}
-                  <a class="dropdown-item" href="#"> {{ deck.title }} </a>
+                  <a class="dropdown-item"> <form class='Product-Form' method='post'>
+                      {% csrf_token %}
+                      <input name="deck_pk" value="{{ deck.pk }}" hidden>
+                      <button type="submit" class="btn">{{ deck.title }}</button>
+                  </form> </a>
 
                   {% endfor %}
                 </div>
