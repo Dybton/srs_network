@@ -165,8 +165,12 @@ class DeckDetailView(LoginRequiredMixin, DetailView):
 
 
 def remembered(request, pk, card_id):
+    deck_id = pk
     print("Hey")
-    return redirect('/mypage/' + str(1))
+    card = get_object_or_404(Card, pk=card_id)
+    card.days_till_study = card.days_till_study * 2
+    card.save()
+    return redirect('/mypage/' + str(deck_id))
 
 # def remembered(request, card_id, deck_id):
 #     if request.method == 'POST':

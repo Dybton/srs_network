@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path('', CardListView.as_view(), name='spaced_repitition-home'),
     path('home/', CardListView.as_view(), name='spaced_repitition-home'),
-    path('card/<int:card_id>/', CardDetailView.as_view(), name='card-detail'),
+    path('card/<int:pk>/', CardDetailView.as_view(), name='card-detail'),
     path('card/<int:pk>/update', CardUpdateView.as_view(), name='card-update'),
     path('card/<int:pk>/delete', CardDeleteView.as_view(), name='card-delete'),
     path('card/new/', CardCreateView.as_view(), name='card-create'),
