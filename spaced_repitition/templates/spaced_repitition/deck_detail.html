@@ -36,7 +36,7 @@
         </div>
       </div>
 
-      <form id="remembered" method="POST" action="{% url 'remembered' request pk=deck.id card_id=card.id %}">
+      <form id="remembered" method="POST" action=" {% url 'remembered' pk=deck.id card_id=card.id %} ">
         {% csrf_token %}
         <input type ="hidden">
       </form>

@@ -164,14 +164,18 @@ class DeckDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-def remembered(request, card_id, deck_id):
-    if request.method == 'POST':
-        deck = get_object_or_404(Deck, pk=deck_id)
-        card = get_object_or_404(Card, pk=card_id)
-        card.days_till_study = card.days_till_study * 2
-        card.save()
-        # return redirect('/mypage/' + str(deck.id))
+def remembered(request, pk, card_id):
+    print("Hey")
 
-        # So upon clicking the button, the page should refresh, and if the card
-        # card is no longer in the deck, then it should disappear
-        # The question then is - How do I call the remembered function from the html page?
+
+# def remembered(request, card_id, deck_id):
+#     if request.method == 'POST':
+#         deck = get_object_or_404(Deck, pk=deck_id)
+#         card = get_object_or_404(Card, pk=card_id)
+#         card.days_till_study = card.days_till_study * 2
+#         card.save()
+#         # return redirect('/mypage/' + str(deck.id))
+
+    # So upon clicking the button, the page should refresh, and if the card
+    # card is no longer in the deck, then it should disappear
+    # The question then is - How do I call the remembered function from the html page?

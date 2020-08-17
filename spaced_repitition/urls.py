@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path('', CardListView.as_view(), name='spaced_repitition-home'),
     path('home/', CardListView.as_view(), name='spaced_repitition-home'),
-    path('card/<int:pk>/', CardDetailView.as_view(), name='card-detail'),
+    path('card/<int:card_id>/', CardDetailView.as_view(), name='card-detail'),
     path('card/<int:pk>/update', CardUpdateView.as_view(), name='card-update'),
     path('card/<int:pk>/delete', CardDeleteView.as_view(), name='card-delete'),
     path('card/new/', CardCreateView.as_view(), name='card-create'),
@@ -13,9 +13,19 @@ urlpatterns = [
     path('mypage/', DeckListView.as_view(), name='spaced_repitition-mypage'),
     path('mypage/<int:pk>/', DeckDetailView.as_view(),
          name='mypage-study-deck'),
+    path('mypage/<int:pk>/<int:card_id>', views.remembered,
+         name='remembered'),
+
+
+
+
+
+
+
+
     # This view is for remembering and incrementing the data to the database.
-    path('mypage/<int:deck_id>/<int:card_id>',
-         views.remembered, name='remembered')
+    # path('mypage/<int:deck_id>/<int:card_id>',
+    # views.remembered, name='remembered')
     # This view should be for me not remembering
 
 
