@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from . models import Card, Deck, User
 from django.urls import reverse
@@ -166,7 +166,7 @@ class DeckDetailView(LoginRequiredMixin, DetailView):
 
 def remembered(request, pk, card_id):
     print("Hey")
-
+    return redirect('/mypage/' + str(1))
 
 # def remembered(request, card_id, deck_id):
 #     if request.method == 'POST':
