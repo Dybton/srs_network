@@ -22,13 +22,19 @@ class CardListView(ListView):
 
         return context
 
-    def copy_card(self, request, pk):
-        card = self.get_object()
-        deck = request.POST.get("deck_pk")
-        card.decks.add(deck)
-        print(card)
 
-        return redirect('home')
+def copy_card(request, pk, card_id):
+    print("Yo")
+    return redirect('/home/')
+
+    # card = self.get_object()
+    # deck = request.POST.get("deck_pk")
+    # card.decks.add(deck)
+    # print(card)
+
+    # #request, deck_id (pk, I think), card_id,
+
+    # return redirect('home')
 
     # def post(self, request, *args, **kwargs):
     #     name = request.POST.get("pk")
@@ -37,8 +43,8 @@ class CardListView(ListView):
     # I need to use the update view I allready have and call it here.
 
     # Associate the Card with the new Publication:
-        # card.decks.add(deck_3) I need to use this one.
-        # I might need the get method here
+    # card.decks.add(deck_3) I need to use this one.
+    # I might need the get method here
 
     # def copy_card_to_deck(self, *args, **kwargs): #How do we call this function within our code?
     #     obj = Foo.objects.get(pk= < some_existing_pk > )  # Here we need to get the card object we are interested in
@@ -46,19 +52,19 @@ class CardListView(ListView):
     #     # Here we need to get the new deck and then save it to it.
     #     obj.save()  # We save the object, which genreates a new pk
 
-        # Can I call the card create view, and then use that for creating a new card in the other deck?
-        # Is it easier to create a new view?
+    # Can I call the card create view, and then use that for creating a new card in the other deck?
+    # Is it easier to create a new view?
 
-        # Here we need to pass in the decks that the logged on user have access to
+    # Here we need to pass in the decks that the logged on user have access to
 
-        # So here we need the deck titles, but we need to filter them based on the user.
+    # So here we need the deck titles, but we need to filter them based on the user.
 
-        # def get_context_data(self, *args, **kwargs):
-        #     deck = self.get_object()
-        #     deck_title = deck.title
-        #     context = super(DeckDetailView, self).get_context_data(*args, **kwargs)
-        #     context['cards'] = Card.objects.filter(decks__title=deck_title)
-        #     return context
+    # def get_context_data(self, *args, **kwargs):
+    #     deck = self.get_object()
+    #     deck_title = deck.title
+    #     context = super(DeckDetailView, self).get_context_data(*args, **kwargs)
+    #     context['cards'] = Card.objects.filter(decks__title=deck_title)
+    #     return context
 
 
 class CardDetailView(DetailView):
@@ -166,7 +172,6 @@ class DeckDetailView(LoginRequiredMixin, DetailView):
 
 def remembered(request, pk, card_id):
     deck_id = pk
-    print("Hey")
     card = get_object_or_404(Card, pk=card_id)
     card.days_till_study = card.days_till_study * 2
     card.save()

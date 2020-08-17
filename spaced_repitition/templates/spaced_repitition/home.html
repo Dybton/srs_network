@@ -54,7 +54,7 @@
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   {% for deck in decks reversed %}
-                  <a class="dropdown-item"> <form class='Product-Form' method='post'>
+                  <a class="dropdown-item"> <form class='Product-Form' method='post' action=" {% url 'copy_card' pk=deck.id card_id=card.id %} ">>
                       {% csrf_token %}
                       <input name="deck_pk" value="{{ deck.pk }}" hidden>
                       <button type="submit" class="btn">{{ deck.title }}</button>
@@ -65,16 +65,16 @@
               </div>
             </div>
             <div class="card-body">
-              <h5 class="card-title"> <a class="article-title" href="{% url 'card-detail' card.id %}">{{ card.question }}</a></h5>
+              <h5 class="card-title"> <a class="article-title">{{ card.question }}</a></h5>
               <p class="card-text"> {{ card.answer}} </p>
-              <span class="oi oi-arrow-left btn"></span>
+              <!-- <span class="oi oi-arrow-left btn"></span>
               <a href="#" class="btn btn-primary">Click to See Answer</a>
-              <span class="oi oi-arrow-right btn"></span>
+              <span class="oi oi-arrow-right btn"></span> -->
 
             </div>
             <div class="card-footer text-muted">
-              <p> 57 added to deck </p>
-              <p> 1/9 cards </p>
+              <!-- <p> 57 added to deck </p>
+              <p> 1/9 cards </p> -->
 
             </div>
           </div>
