@@ -158,10 +158,20 @@ class DeckDetailView(LoginRequiredMixin, DetailView):
         deck = self.get_object()
         deck_title = deck.title
         context = super(DeckDetailView, self).get_context_data(*args, **kwargs)
-        context['cards'] = Card.objects.filter(decks__title=deck_title)
+        context['cards'] = Card.objects.filter(
+            decks__title=deck_title).filter(days_till_study=1)
+        # If card was correct => *2 and then it shouldn't show
         return context
 
-        # On click I could increment the list,
-        # I could then display the list starting with the first one
-        # I might need the post fucntino - to do: Read up in this
-        #
+
+def remembered(request, card_id, deck_id):
+    if request.method == 'POST':
+        deck = get_object_or_404(Deck, pk=deck_id)
+        card = get_object_or_404(Card, pk=card_id)
+        card.days_till_study = card.days_till_study * 2
+        card.save()
+        # return redirect('/mypage/' + str(deck.id))
+
+        # So upon clicking the button, the page should refresh, and if the card
+        # card is no longer in the deck, then it should disappear
+        # The question then is - How do I call the remembered function from the html page?

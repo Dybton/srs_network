@@ -1,5 +1,6 @@
 {% extends "spaced_repitition/base.html" %}
 
+
 {%  block content %}
 
 </br>  </br> </br> </br>
@@ -8,34 +9,46 @@
 </br>
 
 <!-- Here we pass along the cards that belong to the specific deck
- -->
-
+-->
 {% for card in cards reversed %}
-            <div class="my-column
-            col-xl-4 mt-2 ">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title"> {{card.question}} </h5>
-                    <p class="card-text">  </p>
-                        <a href="{% url 'mypage-study-deck' deck.id %}">
-
-<!--                           Here we add the collapse functionality for the button
- -->
-                          <p>
-                            <a class="btn btn-success" data-toggle="collapse" href="#{{card.id}}"  role="button" aria-expanded="false" aria-controls="{{card.id}}">
-                              See Answer
-                            </a>
-
-                          </p>
-                          <div class="collapse" id="{{card.id}}">
-                            <div class="card card-body">
-                              <p> {{card.answer}} </p>
-                            </div>
-                          </div>
-                  </div>
-                </div>
+    <div class="my-column
+    col-xl-4 mt-2 ">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"> {{card.question}} </h5>
+        <p class="card-text">  </p>
+        <a href="{% url 'mypage-study-deck' deck.id %}">
+          <!--                           Here we add the collapse functionality for the button -->
+          <p>
+            <a class="btn btn-success" data-toggle="collapse" href="#{{card.id}}"  role="button" aria-expanded="false" aria-controls="{{card.id}}">
+              See Answer
+            </a>
+          </p>
+          <div class="collapse" id="{{card.id}}">
+            <div class="card card-body">
+              <p> {{card.answer}} </p>
+              <a href="javascript:{document.getElementById('remembered').submit()}">
+                <div class="btn btn-success"> Remembered </div>
+                <!-- Days to study should be incremented - I need to get some post up in here?-->
+              </div>
             </div>
-        {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <form id="remembered" method="POST" action="{% url 'remembered' request pk=deck.id card_id=card.id %}">
+        {% csrf_token %}
+        <input type ="hidden">
+      </form>
+
+      {% endfor %}
+
+  {% endblock content %}
+
+
+
+
+
 
 
 
@@ -67,7 +80,3 @@
     <span class="sr-only">Next</span>
   </a>
 </div> -->
-
-{% endblock content %}
-
-

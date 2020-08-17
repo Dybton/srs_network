@@ -12,7 +12,13 @@ urlpatterns = [
     path('deck/new/', DeckCreateView.as_view(), name='deck-create'),
     path('mypage/', DeckListView.as_view(), name='spaced_repitition-mypage'),
     path('mypage/<int:pk>/', DeckDetailView.as_view(),
-         name='mypage-study-deck')
+         name='mypage-study-deck'),
+    # This view is for remembering and incrementing the data to the database.
+    path('mypage/<int:deck_id>/<int:card_id>',
+         views.remembered, name='remembered')
+    # This view should be for me not remembering
+
+
     # path('mypage/', views.mypage, name='spaced_repitition-mypage'),
     # path('mypage/int:pk/', views.mypage_study_deck,
     #      name='spaced_repitition-mypage_study_deck'),
