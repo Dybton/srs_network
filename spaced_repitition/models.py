@@ -25,3 +25,9 @@ class Card(models.Model):
 
     def __str__(self):
         return self.question
+
+    def decrement_days_till_study(self):
+        if days_till_study > 1:
+            x = str(datetime.now())
+            if x[11:] == '13:08:00.000000':
+                days_till_study -= 1
