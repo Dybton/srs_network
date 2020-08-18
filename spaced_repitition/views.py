@@ -18,13 +18,21 @@ class CardListView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(CardListView, self).get_context_data(*args, **kwargs)
-        context['decks'] = Deck.objects.filter(creator=self.request.user)
-
+        if self.request.user.is_authenticated:
+            context['decks'] = Deck.objects.filter(creator=self.request.user)
         return context
 
 
 def copy_card(request, pk, card_id):
-    print("Yo")
+    deck_id = pk
+    deck = get_object_or_404(Deck, pk=deck_id)
+    card = get_object_or_404(Card, pk=card_id)
+    card.pk = None
+    card.save()
+    card.days_till_study = 1
+    card.decks.add(deck)
+    card.save()
+    deck.save()
     return redirect('/home/')
 
     # card = self.get_object()

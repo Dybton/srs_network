@@ -24,7 +24,7 @@ class Card(models.Model):
     days_till_study = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.question
+        return self.question + ' pk: ' + str(self.pk)
 
     def decrement_days_till_study(self):
         if days_till_study > 1:

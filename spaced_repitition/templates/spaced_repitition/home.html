@@ -45,23 +45,34 @@
 
               <button type="button" class="btn"> </button>
 
+              {% if user.is_authenticated %}
               <div class="dropdown">
                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Add to Deck
                 </button>
+              {% else %}
+
+              <div class="dropdown">
+                <button onclick="window.location.href='/register'"class="btn dropdown-toggle" href="www.google.com" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                  Add to Deck
+                </button>
+
+              {% endif %}
+
+
 <!--                 So here we need a loop that shows all the differnet decks the speciifc user has.
  -->
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   {% for deck in decks reversed %}
-                  <a class="dropdown-item"> <form class='Product-Form' method='post' action=" {% url 'copy_card' pk=deck.id card_id=card.id %} ">>
+                  <a class="dropdown-item"> <form class='Product-Form' method='post' action=" {% url 'copy_card' pk=deck.id card_id=card.id %} ">
                       {% csrf_token %}
                       <input name="deck_pk" value="{{ deck.pk }}" hidden>
                       <button type="submit" class="btn">{{ deck.title }}</button>
                   </form> </a>
-
                   {% endfor %}
                 </div>
+
               </div>
             </div>
             <div class="card-body">
@@ -90,7 +101,7 @@
 
 
                 <button type="button" class="btn btn-success">
-                  Study 57 cards
+                  Study x cards
                 </button>
 
 

@@ -5,7 +5,8 @@ from . import views
 urlpatterns = [
     path('', CardListView.as_view(), name='spaced_repitition-home'),
     path('home/', CardListView.as_view(), name='spaced_repitition-home'),
-    path('home/copy_card/<int:pk>/<int:card_id>', views.copy_card, name='copy_card'),
+    path('home/copy_card/<int:pk>/<int:card_id>',
+         views.copy_card, name='copy_card'),
     path('card/<int:pk>/', CardDetailView.as_view(), name='card-detail'),
     path('card/<int:pk>/update', CardUpdateView.as_view(), name='card-update'),
     path('card/<int:pk>/delete', CardDeleteView.as_view(), name='card-delete'),
@@ -16,12 +17,6 @@ urlpatterns = [
          name='mypage-study-deck'),
     path('mypage/<int:pk>/<int:card_id>', views.remembered,
          name='remembered'),
-
-
-
-
-
-
 
 
     # This view is for remembering and incrementing the data to the database.
