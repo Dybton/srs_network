@@ -9,6 +9,7 @@ class Deck(models.Model):
     title = models.CharField(max_length=100)
     date = models.DateTimeField(default=timezone.now)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    description = models.TextField(max_length=200, blank=True)
 
     def __str__(self):
         return self.title
@@ -19,15 +20,8 @@ class Card(models.Model):
     answer = models.TextField()
     date = models.DateTimeField(default=timezone.now)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    # Tror måske, at jeg skal gøre denne til en one to many? Og så genere et nyt id til hvert kort der bliver ændret - eller hvad? Men hvad nu hvis personen redigerer i kortet?
     decks = models.ManyToManyField(Deck)
     days_till_study = models.IntegerField(default=1)
 
     def __str__(self):
         return self.question + ' pk: ' + str(self.pk)
-
-    def decrement_days_till_study(self):
-        if days_till_study > 1:
-            x = str(datetime.now())
-            if x[11:] == '13:08:00.000000':
-                days_till_study -= 1

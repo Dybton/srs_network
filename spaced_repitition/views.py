@@ -84,16 +84,76 @@ class CardCreateView(LoginRequiredMixin, CreateView):
     fields = ['question', 'answer']
 
     def form_valid(self, form):
+        #card = self.get_object()
         form.instance.creator = self.request.user
-        return super().form_valid(form)
+        deck = get_object_or_404(Deck, pk=self.kwargs['deck_id'])
+        card = self.get_object(Card)
+        # self.card.decks.add(deck)
+        #form.instance.decks = deck
+        print(deck)
+        return super(CardCreateView, self).form_valid(form)
+        # print("YO!")
+        # So what I need to do, is to pass the deck Id to this
+        # deck_id = self.request.Deck
+        #deck_id = 2
+        # self.assign_card(deck_id)
+
+        # deck = get_object_or_404(Deck, slug=self.kwargs[deck_id])
+        # form.instance.decks = deck
+        # return super().form_valid(form)  # I need this
 
     def get_success_url(self):
-        return reverse('spaced_repitition-home')
+        return reverse('spaced_repitition-mypage')
+
+    # def form_valid(self, form):
+    #     deck = get_object_or_404(Deck, pk=self.kwargs[deck_id])
+    #     form.instance.decks = deck
+    #     return super(CardCreateView, self).form_valid(form)
+
+    # def assign_card(self, deck_id):
+    #     self.card = self.get_object(Card)
+    #     self.deck = get_object_or_404(Deck, pk=deck_id)
+    #     self.card.decks.add(deck)
+    #     self.card.save()
+
+    #     self.deck = get_object_or_404(Deck, pk=deck_id)
+    #     self.card.decks.add(deck)
+    #     self.card.save()
+
+
+# Note the below is just inspiration for how to make it work.
+
+        # Hmm, I actually just need to send them back from where they came
+
+        # card = get_object_or_404(Card)
+        # deck = get_object_or_404(Deck, pk=deck_id)
+        # card.decks.add(deck)
+        # card.save()
+
+    # def get_context_data(self, *args, **kwargs):
+    #     deck = self.get_object()
+    #     deck_title = deck.title
+    #     context = super(DeckDetailView, self).get_context_data(*args, **kwargs)
+    #     context['cards'] = Card.objects.filter(
+    #         decks__title=deck_title).filter(days_till_study=1)
+    #     # If card was correct => *2 and then it shouldn't show
+    #     return context
+
+    #     deck_id = pk
+    #     deck = get_object_or_404(Deck, pk=deck_id)
+    #     card = get_object_or_404(Card, pk=card_id)
+    #     card.pk = None
+    #     card.save()
+    #     card.days_till_study = 1
+    #     card.decks.add(deck)
+    #     card.save()
+    #     deck.save()
+    #     return redirect('/home/')
 
 
 class DeckCreateView(LoginRequiredMixin, CreateView):
     model = Deck
-    fields = ['title']
+    fields = ['title', 'description']
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -134,26 +194,6 @@ class CardDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def get_success_url(self):
         return reverse('spaced_repitition-home')
 
-# @login_required(login_url="/login")
-# def mypage(request):
-#     current_user = request.user
-#     deck_title = 'History'  # This is where I need to get the deck I press
-#     context = {
-#         'decks': Deck.objects.filter(creator_id=current_user.id),
-#     }
-
-#     return render(request, 'spaced_repitition/mypage.html', context)
-
-# @login_required(login_url="/login")
-# def mypage_study_deck(request):
-#     current_user = request.user
-#     deck_title = "History"  # I need to get the deck_title here.
-#     deck = Deck()
-#     context = {
-#         'decks': Deck.objects.filter(creator_id=current_user.id), 'cards': Card.objects.filter(decks__title=deck_title)
-#     }
-#     return render(request, 'spaced_repitition/mypage_study_deck.html', context)
-
 
 class DeckListView(LoginRequiredMixin, ListView):
     model = Deck
@@ -174,7 +214,6 @@ class DeckDetailView(LoginRequiredMixin, DetailView):
         context = super(DeckDetailView, self).get_context_data(*args, **kwargs)
         context['cards'] = Card.objects.filter(
             decks__title=deck_title).filter(days_till_study=1)
-        # If card was correct => *2 and then it shouldn't show
         return context
 
 
@@ -184,15 +223,3 @@ def remembered(request, pk, card_id):
     card.days_till_study = card.days_till_study * 2
     card.save()
     return redirect('/mypage/' + str(deck_id))
-
-# def remembered(request, card_id, deck_id):
-#     if request.method == 'POST':
-#         deck = get_object_or_404(Deck, pk=deck_id)
-#         card = get_object_or_404(Card, pk=card_id)
-#         card.days_till_study = card.days_till_study * 2
-#         card.save()
-#         # return redirect('/mypage/' + str(deck.id))
-
-    # So upon clicking the button, the page should refresh, and if the card
-    # card is no longer in the deck, then it should disappear
-    # The question then is - How do I call the remembered function from the html page?

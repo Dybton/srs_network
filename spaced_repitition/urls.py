@@ -10,7 +10,10 @@ urlpatterns = [
     path('card/<int:pk>/', CardDetailView.as_view(), name='card-detail'),
     path('card/<int:pk>/update', CardUpdateView.as_view(), name='card-update'),
     path('card/<int:pk>/delete', CardDeleteView.as_view(), name='card-delete'),
-    path('card/new/', CardCreateView.as_view(), name='card-create'),
+    path('card/new/<int:deck_id>/', CardCreateView.as_view(), name='card-create'),
+    # This is the new one.
+    # path('card/new/<int:deck_id>/assign_to_deck',
+    #      views.assign_to_deck, name='card-assign'),
     path('deck/new/', DeckCreateView.as_view(), name='deck-create'),
     path('mypage/', DeckListView.as_view(), name='spaced_repitition-mypage'),
     path('mypage/<int:pk>/', DeckDetailView.as_view(),
@@ -18,15 +21,4 @@ urlpatterns = [
     path('mypage/<int:pk>/<int:card_id>', views.remembered,
          name='remembered'),
 
-
-    # This view is for remembering and incrementing the data to the database.
-    # path('mypage/<int:deck_id>/<int:card_id>',
-    # views.remembered, name='remembered')
-    # This view should be for me not remembering
-
-
-    # path('mypage/', views.mypage, name='spaced_repitition-mypage'),
-    # path('mypage/int:pk/', views.mypage_study_deck,
-    #      name='spaced_repitition-mypage_study_deck'),
-    # path('mypage/deck', views.mypage_study, name='spaced_repitition-mypage-study'), #Note, istedet for pk, vil jeg gerne have navntet på decket ind (men hvad gavner det? )
 ]
