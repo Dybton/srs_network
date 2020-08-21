@@ -30,7 +30,11 @@ def copy_card(request, pk, card_id):
     card.pk = None
     card.save()
     card.days_till_study = 1
+    card.deck = (deck)
     card.decks.add(deck)
+    # r2.article_set.add(new_article2)
+    # card.decks.append(deck)
+    # card.decks.deck_id
     card.save()
     deck.save()
     return redirect('/home/')
@@ -87,10 +91,8 @@ class CardCreateView(LoginRequiredMixin, CreateView):
         #card = self.get_object()
         form.instance.creator = self.request.user
         deck = get_object_or_404(Deck, pk=self.kwargs['deck_id'])
-        card = self.get_object(Card)
-        # self.card.decks.add(deck)
-        #form.instance.decks = deck
-        print(deck)
+        form.instance.decks = deck
+
         return super(CardCreateView, self).form_valid(form)
         # print("YO!")
         # So what I need to do, is to pass the deck Id to this

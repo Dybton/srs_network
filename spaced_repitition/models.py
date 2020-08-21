@@ -21,6 +21,7 @@ class Card(models.Model):
     date = models.DateTimeField(default=timezone.now)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     decks = models.ManyToManyField(Deck)
+    #decks = models.ForeignKey(Deck, on_delete=models.CASCADE, default=1)
     days_till_study = models.IntegerField(default=1)
 
     def __str__(self):
