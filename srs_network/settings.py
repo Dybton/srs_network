@@ -85,12 +85,23 @@ WSGI_APPLICATION = 'srs_network.wsgi.application'
 #     }
 # }
 
-DATABASES = {  # Postgresdatabase
+# DATABASES = {  # Postgresdatabase
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'srs_network_database3',
+#         'USER': 'djangodbman',
+#         'PASSWORD': 'laddetskeladdetske123',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
+DATABASES = {  # Postgresdatabase for Digital Ocean
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'srs_network_database3',
-        'USER': 'djangodbman',
-        'PASSWORD': 'laddetskeladdetske123',
+        'NAME': 'srs_network_do_1',
+        'USER': 'srs_network_dpman',
+        'PASSWORD': 'omlidterkaffenklar666',
         'HOST': 'localhost',
         'PORT': '5432',
     }
