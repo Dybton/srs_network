@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django-crontab',
+    # 'django-cron', # Turning this off, just for deployment
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -177,7 +177,7 @@ CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 # Cron Stuff
 
 
-CRONJOBS = [
-    ('0 0 * * *',
-     'spaced_repitition.cron.decrement_days_till_study')
-]
+# CRONJOBS = [
+#     ('0 0 * * *',
+#      'spaced_repitition.cron.decrement_days_till_study')
+# ]
