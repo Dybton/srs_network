@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'django-cron',
+    'django-cron',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'spaced_repitition.apps.SpacedRepititionConfig',
-    # 'crispy_forms',
+    'crispy_forms',
 
 ]
 
@@ -177,7 +177,7 @@ CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 # Cron Stuff
 
 
-# CRONJOBS = [
-#     ('0 0 * * *',
-#      'spaced_repitition.cron.decrement_days_till_study')
-# ]
+CRONJOBS = [
+    ('0 0 * * *',
+     'spaced_repitition.cron.decrement_days_till_study')
+]
