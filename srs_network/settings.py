@@ -26,6 +26,8 @@ SECRET_KEY = '0nv9^&dd+07eo@q5k!$^_!_&j)riszr^!=33!fy%k71h9*r^6s'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['157.230.101.208']
+
 
 
 # Application definition
@@ -85,27 +87,27 @@ WSGI_APPLICATION = 'srs_network.wsgi.application'
 #     }
 # }
 
-# DATABASES = {  # Postgresdatabase
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'srs_network_database3',
-#         'USER': 'djangodbman',
-#         'PASSWORD': 'laddetskeladdetske123',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
-DATABASES = {  # Postgresdatabase for Digital Ocean
+DATABASES = {  # Postgresdatabase
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'srs_network_do_1',
-        'USER': 'srs_network_dpman',
-        'PASSWORD': 'omlidterkaffenklar666',
+        'NAME': 'srs_network_database3',
+        'USER': 'djangodbman',
+        'PASSWORD': 'laddetskeladdetske123',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+
+# DATABASES = {  # Postgresdatabase for Digital Ocean
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'srs_network_do_1',
+#         'USER': 'srs_network_dpman',
+#         'PASSWORD': 'omlidterkaffenklar666',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
