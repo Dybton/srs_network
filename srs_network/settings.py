@@ -88,16 +88,23 @@ WSGI_APPLICATION = 'srs_network.wsgi.application'
 #     }
 # }
 
-DATABASES = {  # Postgresdatabase
+DATABASES = {  # Heroku
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'srs_network_database3',
-        'USER': 'djangodbman',
-        'PASSWORD': 'laddetskeladdetske123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': dj_database_url.config(conn_max_age=600, ssl_require=True)
     }
 }
+
+
+# DATABASES = {  # local postgres database
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'srs_network_database3',
+#         'USER': 'djangodbman',
+#         'PASSWORD': 'laddetskeladdetske123',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # DATABASES = {  # Postgresdatabase for Digital Ocean
 #     'default': {
