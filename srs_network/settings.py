@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'srs_network.wsgi.application'
 
 DATABASES = {  # Heroku
     'default': {
-        'ENGINE': dj_database_url.config(conn_max_age=600, ssl_require=True)
+        'ENGINE': DATABASE.config(conn_max_age=600, ssl_require=True)
     }
 }
 
