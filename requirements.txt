@@ -16,6 +16,7 @@ django-crontab==0.7.1
 django-template-helpers==0.2.0
 django-timezone-field==4.0
 filelock==3.0.12
+gunicorn==20.0.4
 importlib-metadata==1.7.0
 kombu==3.0.37
 Pillow==6.1.0

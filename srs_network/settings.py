@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 #ALLOWED_HOSTS = ['157.230.101.208']
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
