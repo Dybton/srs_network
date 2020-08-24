@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'spaced_repitition.apps.SpacedRepititionConfig',
-    'crispy_forms'
-    #'storages'
+    'crispy_forms',
+    'storages'
 
 ]
 
