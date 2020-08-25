@@ -193,11 +193,4 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACT = None
-#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-
-export AWS_ACCESS_KEY_ID = "AKIA375WJRYP7GJWIZAZ"
-export AWS_SECRET_ACCESS_KEY = ""
-export AWS_STORAGE_BUCKET_NAME = "srs-network-files"
-export SECRET_KEY = "5cb414c180616455668a7616f277dbf811ca31f382a58eb3"
-export DEBUG_VALUE = "True"
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
