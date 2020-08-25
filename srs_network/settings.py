@@ -21,11 +21,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
+# Note have dropped the hidden keys
+
 #SECRET_KEY = '0nv9^&dd+07eo@q5k!$^_!_&j)riszr^!=33!fy%k71h9*r^6s'
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG_VALUE')
+
+
+SECRET_KEY = "5cb414c180616455668a7616f277dbf811ca31f382a58eb3"
+DEBUG_VALUE = "True"
 
 ALLOWED_HOSTS = ['srsnetworkapp.herokuapp.com']
 
@@ -187,9 +194,13 @@ CRONJOBS = [
 
 django_heroku.settings(locals())
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+# AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
+AWS_ACCESS_KEY_ID = "AKIA375WJRYPR7YRQVF5"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_STORAGE_BUCKET_NAME = "srs-network-files"
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACT = None
