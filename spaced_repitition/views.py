@@ -91,8 +91,9 @@ class CardCreateView(LoginRequiredMixin, CreateView):
         #card = self.get_object()
         form.instance.creator = self.request.user
         deck = get_object_or_404(Deck, pk=self.kwargs['deck_id'])
-        form.instance.decks = deck
-
+        form.save()
+        # form.instance.decks.set(deck)
+        form.instance.decks.add(deck)
         return super(CardCreateView, self).form_valid(form)
         # print("YO!")
         # So what I need to do, is to pass the deck Id to this
