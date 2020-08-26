@@ -225,6 +225,7 @@ class DeckDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
+# This is for studying decks from my page
 def remembered(request, pk, card_id):
     deck_id = pk
     card = get_object_or_404(Card, pk=card_id)
@@ -232,27 +233,20 @@ def remembered(request, pk, card_id):
     card.save()
     return redirect('/mypage/' + str(deck_id))
 
+# This is from study all cards. I use this one, because I don't have the deck_id and don't need it
+
+
+def remembered_from_study(request, card_id):
+    card = get_object_or_404(Card, pk=card_id)
+    card.days_till_study = card.days_till_study * 2
+    card.save()
+    print('Hej')
+    return redirect('/study')
+
 
 def study_daily_cards(request):
-    #user = get_object_or_404(User)
-    #my_decks = filter(Deck.objects).filter(creator=request.user)
-    #cards = Card.objects.all().filter(Deck.objects).filter(creator=request.user)
-    #cards = Card.objects.filter(Deck.objects).filter(creator=request.user)
-    cards = Card.objects.filter(decks__creator=request.user).filter(days_till_study=1)
-
-    # cards = Card.objects.all().filter(Deck.objects).filter(creator=me)
-    # cards = Card.objects.all().filter(Deck.objects.filter(me))
-
+    cards = Card.objects.filter(
+        decks__creator=request.user).filter(days_till_study=1)
     return render(request, 'spaced_repitition/study.html', {'cards': cards})
-    # return render(request, 'content/home.html', {'cards': cards})
 
-    # def home(request):
-    # content = Content.objects.annotate(
-    #     avg=Avg('review__avg_rating')).filter(user=request.user)
-    # total = Content.objects.filter(user=request.user).count()
-
-    # x = Deck.objects.all().filter(creator=me)
-    # cards = Card.objects.all().filter(x)
-    # cards = Card.objects.all().filter(Deck.objects).filter(creator=me)
-
-    # decks__creator=(creator=request.user)
+    # pk of card

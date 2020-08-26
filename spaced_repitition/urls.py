@@ -21,5 +21,7 @@ urlpatterns = [
     path('mypage/<int:pk>/<int:card_id>', views.remembered,
          name='remembered'),
     path('study', views.study_daily_cards, name='study-daily-cards'),
+    path('study/<int:card_id>', views.remembered_from_study,
+         name='remembered-from-study'),
 
 ]
