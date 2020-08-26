@@ -207,6 +207,11 @@ class DeckListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Deck.objects.filter(creator=self.request.user)
 
+    # Return several contexts
+    # Filter based on the user's deck objects
+        # cards in those decks
+        # count()
+
 
 class DeckDetailView(LoginRequiredMixin, DetailView):
     model = Deck
@@ -226,3 +231,28 @@ def remembered(request, pk, card_id):
     card.days_till_study = card.days_till_study * 2
     card.save()
     return redirect('/mypage/' + str(deck_id))
+
+
+def study_daily_cards(request):
+    #user = get_object_or_404(User)
+    #my_decks = filter(Deck.objects).filter(creator=request.user)
+    #cards = Card.objects.all().filter(Deck.objects).filter(creator=request.user)
+    #cards = Card.objects.filter(Deck.objects).filter(creator=request.user)
+    cards = Card.objects.filter(decks__creator=request.user).filter(days_till_study=1)
+
+    # cards = Card.objects.all().filter(Deck.objects).filter(creator=me)
+    # cards = Card.objects.all().filter(Deck.objects.filter(me))
+
+    return render(request, 'spaced_repitition/study.html', {'cards': cards})
+    # return render(request, 'content/home.html', {'cards': cards})
+
+    # def home(request):
+    # content = Content.objects.annotate(
+    #     avg=Avg('review__avg_rating')).filter(user=request.user)
+    # total = Content.objects.filter(user=request.user).count()
+
+    # x = Deck.objects.all().filter(creator=me)
+    # cards = Card.objects.all().filter(x)
+    # cards = Card.objects.all().filter(Deck.objects).filter(creator=me)
+
+    # decks__creator=(creator=request.user)

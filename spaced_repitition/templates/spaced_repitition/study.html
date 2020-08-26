@@ -1,0 +1,15 @@
+{% extends "spaced_repitition/base.html" %}
+{%  block content %}
+
+<br>
+<br>
+<br>
+<br>
+
+
+{% for card in cards reversed %}
+        <h5 class="card-title"> {{card.question}} </h5>
+              <p> {{card.answer}} </p>
+{% endfor %}
+
+{% endblock content %}

@@ -20,5 +20,6 @@ urlpatterns = [
          name='mypage-study-deck'),
     path('mypage/<int:pk>/<int:card_id>', views.remembered,
          name='remembered'),
+    path('study', views.study_daily_cards, name='study-daily-cards'),
 
 ]
