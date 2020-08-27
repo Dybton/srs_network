@@ -11,6 +11,9 @@
   height: 50px;
   width: 50px; }
 
+.flash-card {
+  min-height: 200px; }
+
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors

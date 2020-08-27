@@ -35,7 +35,7 @@
 
 <section>
     <div class="container my-container">
-        <div class="row my-row">
+        <div class="row my-row mb-4">
             <div class="my-column
             col-xl-1 offset-xl-2
             mr-xl-5
@@ -62,9 +62,8 @@
             <div class="my-column
             col-xl offset-xl-2
             ">
-                <p> I’m really into baseball. But I also like football. But my real passion is petang </p>
-
             </div>
+
         </div>
 
         <div class="row my-row">
@@ -79,15 +78,22 @@
             <div class="my-column
             col-xl-2 offset-xl-2
             ">
-                <a class="nav-item nav-link" href="{% url 'deck-create' %}"> <button class= "btn btn-success"> New Deck </button></a>
+                <a class="nav-item nav-link float-left" href="{% url 'deck-create' %}"> <button class= "btn btn-primary"> New Deck </button></a>
 
             </div>
 
             <div class="my-column
+            col-xl-2
+            ">
+                <a class="nav-item nav-link" href="{% url 'study-daily-cards'%}"> <button class= "btn btn-success"> Study Cards </button></a>
+
+            </div>
+
+            <!-- <div class="my-column
             col-xl
             ">
                 <a class="btn btn-success" href="{% url 'study-daily-cards'%}" role="button">Study Daily Cards</a>
-            </div>
+            </div> -->
         </div>
 
     </div>
@@ -97,18 +103,25 @@
             <div class="my-column
             col-xl-2 mx-auto
             ">
-                <h2 class="mt-3"> My Decks </h2>
+                <h2 class="mt-3 mb-4"> My Decks </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="my-column
+            col-xl-12 mx-auto
+            ">
+                <hr>
             </div>
         </div>
 
-    <div class="row">
+    <div class="row mt-1 mb-4">
         {% for deck in decks reversed %}
             <div class="my-column
-            col-xl-4 mt-2 ">
-                <div class="card">
+            col-xl-4 mt-4">
+                <div class="card d-flex">
                   <div class="card-body">
                     <h5 class="card-title"> {{deck.title}} </h5>
-                    <p class="card-text">{{deck.description}}</p>
+                    <!-- <p class="card-text">{{deck.description}}</p> -->
                         <a href="{% url 'mypage-study-deck' deck.id %}">
                             <button type="button" class="btn btn-success">
                               Study this Deck
@@ -116,7 +129,7 @@
                             <br>
                             <br>
                         <a href="{% url 'card-create' deck_id=deck.id %}" >
-                            Add Card
+                            Add New Card
                         </a>
                   </div>
                 </div>

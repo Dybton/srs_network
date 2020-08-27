@@ -1,8 +1,8 @@
 {% extends "spaced_repitition/base.html" %}
 
 
-<!-- <style>
-    .my-container {
+<style>
+    /*.my-container {
         border: 1px solid green;
     }
 
@@ -19,50 +19,51 @@
         border-top: 1px solid green;
         border-right: 1px solid green;
         border-radius: 15px 15px 0px 0px;
+    }*/
+
+    .flashcard {
+      height: 1000px;
+
     }
 
-</style> -->
+</style>
 
 {% block content %}
-
-
-</br>
-</br>
 
 
 <body>
   <section>
     <div class="container my-container">
       <div class="row my-row">
+
         <div class="col-6 offset-2 my-column">
+
+          </br></br></br>
           {% for card in cards %}
-
-          <div class="card">
+          <div class="card mb-3">
             <div class="card-header">
-              <img class = "large-profile-picture" src = "{{ card.creator.profile.image.url }}">
-              <a class="mr-2" href="#">{{ card.creator }}</a>
-              <p> {{ card.date }} </p>
+              <img class = "float:left mr-2 mt-1 small-profile-picture" src ="{{ card.creator.profile.image.url }}" >
+              <a class="mb-4 float-up"  > {{ card.creator }}</a>
+               <small> <p class=mt-2> {{ card.date }}  </p> </small>
 
-              <button type="button" class="btn"> </button>
+            </div> <!-- Card Header ender  -->
 
+            <!-- Here we have the questions and answers -->
+            <div class="card-body mt-4">
+              <h5 class="card-title"> <a class="article-title">{{ card.question }}</a></h5>
+              <p class="card-text"> {{ card.answer}} </p>
+            </div> <!-- Card body ender -->
+
+            <div class="card-footer text-muted">
+
+              <!-- Here the dropdown starts -->
               {% if user.is_authenticated %}
-              <div class="dropdown">
-                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="dropdown show float-right">
+                <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Add to Deck
-                </button>
-              {% else %}
+                </a>
 
-              <div class="dropdown">
-                <button onclick="window.location.href='/register'"class="btn dropdown-toggle" href="www.google.com" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
-                  Add to Deck
-                </button>
-
-              {% endif %}
-
-<!--                 So here we need a loop that shows all the differnet decks the speciifc user has.
- -->
-
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   {% for deck in decks reversed %}
                   <a class="dropdown-item"> <form class='Product-Form' method='post' action=" {% url 'copy_card' pk=deck.id card_id=card.id %} ">
                       {% csrf_token %}
@@ -71,33 +72,36 @@
                   </form> </a>
                   {% endfor %}
                 </div>
-
               </div>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title"> <a class="article-title">{{ card.question }}</a></h5>
-              <p class="card-text"> {{ card.answer}} </p>
-              <!-- <span class="oi oi-arrow-left btn"></span>
-              <a href="#" class="btn btn-primary">Click to See Answer</a>
-              <span class="oi oi-arrow-right btn"></span> -->
+              <!-- Here the dropdown ends -->
+              {% else %}
+              <div class="dropdown float-right">
+                  <button onclick="window.location.href='/register'"class="btn dropdown-toggle" href="www.google.com" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                    Add to Deck
+                  </button>
+                </div>
+              {% endif %}
 
-            </div>
-            <div class="card-footer text-muted">
-              <!-- <p> 57 added to deck </p>
-              <p> 1/9 cards </p> -->
 
-            </div>
-          </div>
-            </br>
+
+
+            </div> <!-- Footer ender  -->
+          </div> <!-- Card ender  -->
+
           {% endfor %}
-        </div>
-        <div class="col-md-4 my-column mt-3">
-          <div class="card">
+        </div> <!-- Column ender  -->
+
+
+<!--         This is the study cards button thingy  -->
+
+      <div class="col-md-4 my-column">
+        </br></br></br>
+          <div class="card flashcard">
             <div class="card-body">
-              <h5 class="card-title"> Press here to study cards</h5>
+              <h5 class="card-title"> Press Here to Study Daily Cards</h5>
               <!-- Button trigger modal -->
 
-              <a class="btn btn-success" href="{% url 'study-daily-cards'%}" role="button">Study Daily Cards</a>
+              <a class="btn btn-success mt-4 mb-3" href="{% url 'study-daily-cards'%}" role="button">Study Cards</a>
 
 
             </div>
