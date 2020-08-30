@@ -226,11 +226,16 @@ class DeckDetailView(LoginRequiredMixin, DetailView):
 
 
 # This is for studying decks from my page
-def remembered(request, pk, card_id):
+def remembered(request, pk, card_id, value):
     deck_id = pk
     card = get_object_or_404(Card, pk=card_id)
-    card.days_till_study = card.days_till_study * 2
-    card.save()
+    if value is 0:
+        card.days_till_study = card.days_till_study * 2
+        card.save()
+        print(value)
+    else:
+        card.days_till_study = 1
+        card.save()
     return redirect('/mypage/' + str(deck_id))
 
 # This is from study all cards. I use this one, because I don't have the deck_id and don't need it

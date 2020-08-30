@@ -18,7 +18,7 @@ urlpatterns = [
     path('mypage/', DeckListView.as_view(), name='spaced_repitition-mypage'),
     path('mypage/<int:pk>/', DeckDetailView.as_view(),
          name='mypage-study-deck'),
-    path('mypage/<int:pk>/<int:card_id>', views.remembered,
+    path('mypage/<int:pk>/<int:card_id>/<int:value>', views.remembered,
          name='remembered'),
     path('study', views.study_daily_cards, name='study-daily-cards'),
     path('study/<int:card_id>', views.remembered_from_study,

@@ -27,8 +27,7 @@
               <div class="card card-body">
                 <p> {{card.answer}} </p>
                 <a href="javascript:{document.getElementById('remembered').submit()}">
-                  <div class="btn btn-success"> Remembered </div>
-                  <!-- Days to study should be incremented - I need to get some post up in here?-->
+                <div class="btn btn-success"> Remembered </div> </a>
                 </div>
               </div>
             </div>
@@ -39,6 +38,7 @@
           {% csrf_token %}
           <input type ="hidden">
         </form>
+
 
         {% endfor %}
       </a>
