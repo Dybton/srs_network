@@ -50,11 +50,14 @@
 
             <!-- Here we have the questions and answers -->
 
-              <div onclick="myFunction()" style="cursor: pointer;" class="card-body mt-4">
-              <h5> {{card.question}} </h5>
-              <div id="myDIV{{card.card_id}}" > <p class="card-title"> Click to see answer </p> </div>
-              <!-- <p class="card-text"> {{ card.answer}} </p> -->
-            </div> <!-- Card body ender -->
+              <!-- <div onclick="#" style="cursor: pointer;" class="card-body mt-4"> -->
+              <div class="card-body mt-4">
+                <h5> {{card.question}} </h5>
+                <!-- <div> <p class="card-title"> Click to see answer </p> </div> -->
+                <p class="card-text"> {{ card.answer}} </p>
+              </div> <!-- Card body ender -->
+
+
 
             <div class="card-footer text-muted">
 
@@ -87,17 +90,6 @@
 
             </div> <!-- Footer ender  -->
           </div> <!-- Card ender  -->
-
- <script>
-        function myFunction() {
-          var x = document.getElementById("myDIV{{card.card_id}}");
-          if (x.innerHTML ===  "Click to see answer") {
-            x.innerHTML = "{{card.answer}}";
-          } else {
-            x.innerHTML = "Click to see answer";
-          }
-        }
-      </script>
 
 
           {% endfor %}
