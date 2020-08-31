@@ -46,6 +46,10 @@
         <input type ="hidden">
       </form>
 
+      {% empty %}
+      <p> No cards are due </p>
+      <a href="{% url 'card-create' deck_id=deck.id %}" > Add New Card </a>
+
 
 
 

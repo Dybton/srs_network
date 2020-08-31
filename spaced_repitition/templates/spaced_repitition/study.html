@@ -8,10 +8,6 @@
 
   {% for card in cards reversed %}
 
-    {% if cards.count is 0 %}
-    <p> Yo </p>
-    {% endif %}
-
       <div class="my-column
       col-xl-4 mt-2 mx-auto ">
       <div class="card">
@@ -45,6 +41,11 @@
           {% csrf_token %}
           <input type ="hidden">
         </form>
+
+        {% empty %}
+        <p> No cards are due </p>
+        <p> Find new cards on the <a href="{% url 'spaced_repitition-home' %}"> feed </a> </p>
+        <p> Or go to <a href="{% url 'spaced_repitition-mypage' %}"> mypage </a> to create more cards </p>
 
         {% endfor %}
       </a>

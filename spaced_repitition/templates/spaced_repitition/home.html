@@ -81,7 +81,6 @@
                 <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Add to Deck
                 </a>
-
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   {% for deck in decks reversed %}
                   <a class="dropdown-item"> <form class='Product-Form' method='post' action=" {% url 'copy_card' pk=deck.id card_id=card.id %} ">
@@ -89,6 +88,8 @@
                       <input name="deck_pk" value="{{ deck.pk }}" hidden>
                       <button type="submit" class="btn">{{ deck.title }}</button>
                   </form> </a>
+                  {% empty %}
+                  <a class="dropdown-item" href="{% url 'deck-create' %}"> Create deck </a>
                   {% endfor %}
                 </div>
               </div>
