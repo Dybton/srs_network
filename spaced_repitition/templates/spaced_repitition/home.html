@@ -34,13 +34,14 @@
   <script type="text/javascript">
 
   var clicked = false;
-  function toggle(id){
+  function toggle(id, answer){
     if(!clicked){
       clicked = true;
-      document.getElementById(`card-${id}`).innerHTML = "On";
-    }else{
+      document.getElementById(`card-${id}`).innerHTML = answer;
+    }
+    else{
       clicked = false;
-      document.getElementById(`card-${id}`).innerHTML = "Click to see answer";
+      document.getElementById(`card-${id}`).innerHTML = answer;
     }
   }
 </script>
@@ -59,12 +60,10 @@
               <img class = "float:left mr-2 mt-1 small-profile-picture" src ="{{ card.creator.profile.image.url }}" >
               <a class="mb-4 float-up"  > {{ card.creator }}</a>
                <small> <p class=mt-2> {{ card.date }}  </p> </small>
-               {{ card.id }}
-
             </div> <!-- Card Header ender  -->
 
             <!-- Here we have the questions and answers -->
-            <div onclick="toggle({{ card.id }});" style="cursor: pointer;">
+            <div onclick="toggle({{ card.id }}, '{{ card.answer }}');" style="cursor: pointer;">
               <div class="card-body mt-4">
                 <h5 class="card-title"> <a class="article-title">{{ card.question }}</a></h5>
                 <p id="card-{{card.id}}"> Click to see Answer </p>
