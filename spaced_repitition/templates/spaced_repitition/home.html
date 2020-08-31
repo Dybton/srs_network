@@ -30,8 +30,22 @@
 
 {% block content %}
 
-
 <body>
+  <script type="text/javascript">
+
+  var clicked = false;
+  function toggle(id){
+    if(!clicked){
+      clicked = true;
+      document.getElementById(`card-${id}`).innerHTML = "On";
+    }else{
+      clicked = false;
+      document.getElementById(`card-${id}`).innerHTML = "Click to see answer";
+    }
+  }
+</script>
+
+
   <section>
     <div class="container my-container">
       <div class="row my-row">
@@ -45,17 +59,18 @@
               <img class = "float:left mr-2 mt-1 small-profile-picture" src ="{{ card.creator.profile.image.url }}" >
               <a class="mb-4 float-up"  > {{ card.creator }}</a>
                <small> <p class=mt-2> {{ card.date }}  </p> </small>
+               {{ card.id }}
 
             </div> <!-- Card Header ender  -->
 
             <!-- Here we have the questions and answers -->
-
-              <!-- <div onclick="#" style="cursor: pointer;" class="card-body mt-4"> -->
+            <div onclick="toggle({{ card.id }});" style="cursor: pointer;">
               <div class="card-body mt-4">
-                <h5> {{card.question}} </h5>
-                <!-- <div> <p class="card-title"> Click to see answer </p> </div> -->
-                <p class="card-text"> {{ card.answer}} </p>
+                <h5 class="card-title"> <a class="article-title">{{ card.question }}</a></h5>
+                <p id="card-{{card.id}}"> Click to see Answer </p>
+                <!-- <p class="card-text"> {{ card.answer}} </p> -->
               </div> <!-- Card body ender -->
+            </div>
 
 
 
@@ -81,15 +96,19 @@
               <!-- Here the dropdown ends -->
               {% else %}
               <div class="dropdown float-right">
-                  <button onclick="window.location.href='/register'"class="btn dropdown-toggle" href="www.google.com" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                  <button onclick="window.location.href='/register'"class="btn dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
                     Add to Deck
                   </button>
                 </div>
               {% endif %}
 
 
+
+
             </div> <!-- Footer ender  -->
           </div> <!-- Card ender  -->
+
+
 
 
           {% endfor %}
@@ -118,7 +137,25 @@
     </div>
   </section>
 
+<!-- <script type="text/javascript">
+                              function myFunction(id, answer) {
+                                  var x = document.getElementById(`myDIV${id}`);
+                                  if (x.innerHTML === "Click to see Answer") {
+                                    x.innerHTML = answer;
+                                  } else {
+                                    x.innerHTML = "Click to see Answer";
+                                  }
+                                }
+          </script> -->
 
+
+
+
+
+
+<!-- So I need to seperate the javascript from the django
+ -->
+ <!-- Also, I need to remove the script from the loop -->
 
 
 </body>
@@ -128,3 +165,4 @@
 </br>
 </br>
 </br>
+
