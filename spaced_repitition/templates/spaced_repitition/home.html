@@ -41,7 +41,7 @@
     }
     else{
       clicked = false;
-      document.getElementById(`card-${id}`).innerHTML = answer;
+      document.getElementById(`card-${id}`).innerHTML = "Click to see answer";
     }
   }
 </script>
@@ -66,7 +66,7 @@
             <div onclick="toggle({{ card.id }}, '{{ card.answer }}');" style="cursor: pointer;">
               <div class="card-body mt-4">
                 <h5 class="card-title"> <a class="article-title">{{ card.question }}</a></h5>
-                <p id="card-{{card.id}}"> Click to see Answer </p>
+                <p id="card-{{card.id}}"> Click to see answer </p>
                 <!-- <p class="card-text"> {{ card.answer}} </p> -->
               </div> <!-- Card body ender -->
             </div>
