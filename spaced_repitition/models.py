@@ -23,6 +23,7 @@ class Card(models.Model):
     decks = models.ManyToManyField(Deck)
     #decks = models.ForeignKey(Deck, on_delete=models.CASCADE, default=1)
     days_till_study = models.IntegerField(default=1)
+    copied = models.BooleanField(default=False)
 
     def __str__(self):
         return self.question + ' pk: ' + str(self.pk)
