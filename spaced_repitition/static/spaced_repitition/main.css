@@ -12,7 +12,14 @@
   width: 50px; }
 
 .flash-card {
-  min-height: 200px; }
+  min-height: 200px;
+  max-height: 200px; }
+
+.toggle-content {
+  display: none; }
+
+.toggle-content.is-visible {
+  display: block; }
 
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
