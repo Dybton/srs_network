@@ -15,11 +15,18 @@
   min-height: 200px;
   max-height: 200px; }
 
+.study-card {
+  min-height: 350px;
+  max-height: 350px; }
+
 .toggle-content {
   display: none; }
 
 .toggle-content.is-visible {
   display: block; }
+
+.answer-button {
+  min-width: 400px; }
 
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)

@@ -8,6 +8,26 @@
   display: none;
 }
 
+  /* .my-container {
+        border: 1px solid green;
+    }*/
+
+  /*  .row {
+        border: 3px solid red;
+    }
+
+    .col {
+        border: 3px dotted blue;
+    }*/
+
+   /* .my-container2 {
+        border-left: 1px solid green;
+        border-top: 1px solid green;
+        border-right: 1px solid green;
+        border-radius: 15px 15px 0px 0px;
+    }*/
+
+
 </style>
 
 <br>
@@ -55,32 +75,65 @@
                         <div class="carousel-item  ">
                     {% endif %}
                       <!-- This is what I'm working with. I should work from this -->
-                      <div class="card">
+                      <div class="card study-card">
                         <div class="card-header">
-                          <img class = "float:left mr-2 mt-1 small-profile-picture" src ="{{ card.creator.profile.image.url }}" >
-                          <a class="mb-4 float-up"  > {{ card.creator }}</a>
-                           <small> <p class=mt-2> {{ card.date }}  </p> </small>
-                        </div> <!-- Card Header ender  -->
+                          <div class="row">
+                            <div class="col-1 mr-4">
+                              <img class = "float:left mr-2 mt-1 small-profile-picture" src ="{{ card.creator.profile.image.url }}" >
+                            </div>
+                            <div class="col ml-1">
+
+                              <div class="row">
+                                <a> {{ card.creator }}</a>
+                              </div>
+                              <div class="row">
+                                <small> <p> {{ card.date }}  </p> </small>
+                              </div>
+                            </div>
+                          </div>
+                          </div> <!-- Card Header ender  -->
 
                         <div onclick="toggle({{ card.id }},'{{ card.answer }}');" style="cursor: pointer;">
-                          <div class="card-body mt-4">
-                            <h5 class="card-title "> <a class="article-title">{{ card.question }}</a></h5>
-                            <p id="card-{{card.id}}"> Click to see answer </p>
-                            <!-- <p class="card-text"> {{ card.answer}} </p> -->
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col offset-1">
+                                <div class="row">
+                                  <div class="col ml-2">
+                                    <h5 class="card-title mx-auto "> <a class="article-title">{{ card.question }}</a></h5>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                    <p class="mx-auto" id="card-{{card.id}}"> Click to see answer </p>
+                                </div>
+                                <div class="row toggle-content" id="buttons-{{card.id}}">
+                                    <div class="col text-center">
+                                      <a href="javascript:{document.getElementById('remembered').submit()}">
+                                      <div class="btn btn-success col-5"> Remembered </div> </a>
+                                      <a href="javascript:{document.getElementById('didnotremember').submit()}">
+                                      <div class="btn btn-danger col-5">  Didn't Remember </div> </a>
+                                    </div>
+
+
+                                  </div> <!-- Both buttons ends  -->
+                                </div>
+                              </div>
+                            </div>
                           </div> <!-- Card body ender -->
+
                         </div>
                         <!-- This is where we need to get toggle to work -->
 
-                        <div class="toggle-content" id="buttons-{{card.id}}">
-                          <a href="javascript:{document.getElementById('remembered').submit()}">
-                            <div class="btn btn-success"> Remembered </div>
-                          <a href="javascript:{document.getElementById('didnotremember').submit()}">
-                            <div class="btn btn-danger"> Didn't Remember </div> </a>
-                        </div> <!-- Both buttons ends  -->
 
+
+                        <!-- <div class="card-footer float-down">
+                          Test
                         </div>
+ -->
+                        </div>
+
                       </div>
                       <!-- Here it ends -->
+
                     </div>
 
                    <!--  Forms for the buttons -->

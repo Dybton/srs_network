@@ -27,12 +27,21 @@ $body-bg: #F5F2F2;
   max-height: 200px;
 }
 
+.study-card {
+  min-height: 350px;
+  max-height: 350px;
+}
+
  .toggle-content {
   display: none;
 }
 
 .toggle-content.is-visible {
   display: block;
+}
+
+.answer-button {
+  min-width: 400px;
 }
 
 @import '../../../node_modules/bootstrap/scss/bootstrap';
