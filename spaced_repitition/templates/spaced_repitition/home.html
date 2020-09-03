@@ -44,6 +44,16 @@
       document.getElementById(`card-${id}`).innerHTML = "Click to see answer";
     }
   }
+
+  function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
 </script>
 
 
@@ -70,8 +80,6 @@
                 <!-- <p class="card-text"> {{ card.answer}} </p> -->
               </div> <!-- Card body ender -->
             </div>
-
-
 
             <div class="card-footer text-muted">
 

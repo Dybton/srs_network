@@ -21,6 +21,14 @@ $body-bg: #F5F2F2;
   width: 50px;
 }
 
+ .toggle-content {
+  display: none;
+}
+
+.toggle-content.is-visible {
+  display: block;
+}
+
 @import '../../../node_modules/bootstrap/scss/bootstrap';
 
 
