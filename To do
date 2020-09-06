@@ -1,4 +1,76 @@
-- Fix the toggle / collapse buttons -
+- Fix the toggle / collapse buttons - done
 - If wrong, the card should go back -
+- Cards can only be seen, they can't be unseen -
 
-- Cards can only be seen, they can't be unseen
+
+
+
+Kort
+
+{% for card in cards %}
+
+<div class="row">
+  <div class="col-xl-6 mt-2 mx-auto">
+    <div class="card study-card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-1 mr-3"> <!-- Image -->
+            <img class = "float:left mr-2 mt-1 small-profile-picture" src ="{{ card.creator.profile.image.url }}" >
+          </div>
+          <div class="col ml-4"> <!-- Name and data -->
+            <div class="row mt-2"> <!-- Name -->
+              <a class="text-primary"> {{ card.creator }}</a>
+            </div>
+            <div class="row mb-1"> <!-- Data -->
+              <small> <a class="text-muted"> {{ card.date }}  </a> </small>
+            </div>
+            <div class="row mb-n2"> <!-- Question -->
+              <h5 class="float-up"> {{ card.question }} </h5>
+            </div>
+          </div> <!-- Header row ends -->
+        </div>
+      </div> <!-- header ends  -->
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-1 mr-3">
+          </div>
+          <div class="col ml-2 my-container">
+            <p> {{card.answer}} </p>
+          </div>
+        </div> <!-- body row ends -->
+        <div class="row">
+          <div class="col text-center my-container">
+            <div class="row">
+              <div class="col">
+                <a href="javascript:{document.getElementById('remembered').submit()}">
+                <div class="btn btn-success col-9"> Remembered </div> </a>
+              </div>
+              <div class="col">
+                <a href="javascript:{document.getElementById('didnotremember').submit()}">
+                <div class="btn btn-danger col-9">  Didn't Remember </div> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- body ends -->
+
+
+      <div class="card-footer text-muted">
+        <div class="row mb-n2">
+          <div class="col">
+             <p class="float-left"> <small> 10 people added </small> </p>
+          </div>
+          <div class="col">
+             <p class="text-center"> <small> 1/6  </small> </p>
+          </div>
+          <div class="col">
+            <p class="float-right"> <small> Edit  </small> </p>
+          </div>
+        </div> <!-- footer row ends -->
+      </div> <!-- footer ends -->
+    </div> <!-- card end -->
+  </div>
+</div>
+
+{% endfor %}

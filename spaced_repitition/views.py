@@ -191,7 +191,7 @@ def remembered(request, pk, card_id, value):
         card.save()
         print(value)
     else:
-        card.days_till_study = 1
+        card.days_till_study = 2
         card.save()
     return redirect('/mypage/' + str(deck_id))
 
@@ -205,7 +205,7 @@ def remembered_from_study(request, card_id, value):
         card.save()
         print(value)
     else:
-        card.days_till_study = 1
+        card.days_till_study = 2
         card.save()
     return redirect('/study')
 

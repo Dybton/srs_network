@@ -12,7 +12,7 @@
         border: 1px solid green;
     }*/
 
-  /*  .row {
+    /*.row {
         border: 3px solid red;
     }
 
@@ -52,6 +52,7 @@
     }
   }
 </script>
+
 
 <div class="row">
   <div class="my-column
@@ -94,46 +95,33 @@
                           </div> <!-- Card Header ender  -->
 
                         <div onclick="toggle({{ card.id }},'{{ card.answer }}');" style="cursor: pointer;">
-                          <div class="card-body">
+                          <div class="card-body col">
                             <div class="row">
                               <div class="col offset-1">
                                 <div class="row">
-                                  <div class="col ml-2">
-                                    <h5 class="card-title mx-auto "> <a class="article-title">{{ card.question }}</a></h5>
+                                  <div class="col my-container ml-2">
+                                    <h5 class="card-title"> <a class="article-title">{{ card.question }}</a></h5>
                                   </div>
                                 </div>
                                 <div class="row">
                                     <p class="mx-auto" id="card-{{card.id}}"> Click to see answer </p>
                                 </div>
                                 <div class="row toggle-content" id="buttons-{{card.id}}">
-                                    <div class="col text-center">
+                                    <div class="col  ml-2 my-container">
                                       <a href="javascript:{document.getElementById('remembered').submit()}">
                                       <div class="btn btn-success col-5"> Remembered </div> </a>
                                       <a href="javascript:{document.getElementById('didnotremember').submit()}">
                                       <div class="btn btn-danger col-5">  Didn't Remember </div> </a>
                                     </div>
-
-
                                   </div> <!-- Both buttons ends  -->
                                 </div>
                               </div>
                             </div>
                           </div> <!-- Card body ender -->
-
                         </div>
-                        <!-- This is where we need to get toggle to work -->
-
-
-
-                        <!-- <div class="card-footer float-down">
-                          Test
                         </div>
- -->
-                        </div>
-
                       </div>
                       <!-- Here it ends -->
-
                     </div>
 
                    <!--  Forms for the buttons -->
@@ -156,7 +144,7 @@
                 {% endfor %}
             </div>
 
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="sr-only">Previous</span>
             </a>
@@ -164,7 +152,7 @@
             <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="sr-only">Next</span>
-            </a>
+            </a> -->
 
             </div>
         </div>
