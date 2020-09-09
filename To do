@@ -1,6 +1,46 @@
 - Fix the toggle / collapse buttons - done
 - If wrong, the card should go back -
 - Cards can only be seen, they can't be unseen -
+- Add tagging and search
+- Add comments
+- If deck is addded to deck => increase it's ranking on the where it shoild be shown
+- Allow people to visit each others sites
+- Delete cards
+- Delete decks
+- Secret cards
+- Create messenging that tells you, you've created a new x
+- Fix the design
+- Make it response, and get it to work across all platforms
+- Fix header
+- Improve the initial UX (fx, let them know that they need to create a deck before they can create cards)
+- Notifications
+
+
+
+
+
+Trines noter:
+
+- Når man kan vælge om et kort skal være secret - evt placer en lås der hhv åbner eller lukker - evt også noget farvekode (rød og grøn)
+    - Beskeden som kommer frem når man tilføjer et kort mm. Kunne have en svag blå baggrund, i stedet for at have samme design som en knap
+    - Inde på et kort eller dæk - slet "add to deck" (og sæt et X i stedet for at lukke vinduet) - I stedet, hvis det er et enkelt kort, kan man via plus-tegnet i bunden af vinduet trykke "save card" (eller "new deck") hvorefter der kommer en overlay menu med oversigt af de forskellige decks man har - Hvis det er et dæk kunne man igen via plus tegnet trykke "save deck" eller "new deck"
+    - Flyt meter-boksen fra samme række som resten af feeden - evt sæt den i led med headeren eller et sted under profilen til højre
+    - I stedet for "study the cards below to fill out the meter" --> "Study your cards to complete the progress bar" eller noget.
+    - Overvej en form for intro/walkthrough hvis det skal bruges af novel users. så man "slider" igennem feks 4 overlay sider hvor man ser en lille animation eller illuatration af hvordan man bruger dette program
+    - Edit profile-muligheder - Generelt en knap oppe i header med "settings" eller noget hvor man kan logge ind, logge ud etc.
+    - Tilføj tekst over en samling af decks - evt ovenpå stregen som går rundt om - "Your cards" eller "your collection"
+    - Højere kontrast mellem elementerne og baggrunden - se evt facebook
+    - Gør teksten for post-tidspunkt mere tydelig
+    - Gør farverne af de fire knapper rød, orange, gul og grøn
+    - Brug et andet ord en "again" til den korteste tid
+    - Tilføj beskrivende tekst over valgmulighederne (tid)
+    - Beskrivende hover tekst til knapper uden tekst
+    - En tekst med feedback når man færdiggør sin daglige progress bar
+    - Søgefunktion - find andre kort
+    - Når man laver et nyt kort/dæk - et felt hvori man skriver keywords så folk kan søge på det
+    - Tilføj "lag" under den forreste side når det er et dæk - for at tydeliggøre forskellen mellem det og et enkelt kort
+
+
 
 
 
