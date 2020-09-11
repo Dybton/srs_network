@@ -14,7 +14,6 @@ class CardListView(ListView):
     model = Card
     template_name = 'spaced_repitition/home.html'
     context_object_name = 'cards'
-    ordering = ['-date']
 
     def get_queryset(self):
         return Card.objects.filter(copied=False)
