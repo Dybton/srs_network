@@ -23,7 +23,6 @@
 
     .flashcard {
       height: 1000px;
-
     }
 
 </style>
@@ -73,7 +72,7 @@
             </div> <!-- Card Header ender  -->
 
             <!-- Here we have the questions and answers -->
-            <div onclick="toggle({{ card.id }}, '{{ card.answer }}');" style="cursor: pointer;">
+            <div onclick="toggle({{ card.id }}, `{{ card.answer }}`);" style="cursor: pointer;">
               <div class="card-body mt-4">
                 <h5 class="card-title"> <a class="article-title">{{ card.question }}</a></h5>
                 <p id="card-{{card.id}}"> Click to see answer </p>
