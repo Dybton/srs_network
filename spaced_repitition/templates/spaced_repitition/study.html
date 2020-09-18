@@ -28,6 +28,14 @@
         border-radius: 15px 15px 0px 0px;
     }
 
+    .pointy-mouse {
+      cursor: pointer;
+    }
+
+    .default-mouse {
+      cursor: default;
+    }
+
 
 </style>
 
@@ -43,6 +51,7 @@
     if(!clicked){
       clicked = true;
       document.getElementById(`card-${id}`).innerHTML = answer;
+      document.getElementById("myDIV").className = "default-mouse";
     }
     // else{
     //   clicked = false;
@@ -50,7 +59,7 @@
     // }
   }
 
-  function myFunction() {
+function myFunction() {
   var x = document.getElementById("myDIV");
   if (x.style.display === "none") {
     x.style.display = "block";
@@ -58,6 +67,8 @@
     x.style.display = "none";
   }
 }
+
+
 
 </script>
 
@@ -88,8 +99,8 @@
               </div>
             </div> <!-- header ends  -->
 
-
-            <div class="card-body" onclick="toggle({{ card.id }}, `{{ card.answer }}`);" style="cursor: pointer;">
+            <div class="pointy-mouse" id="myDIV" onclick="toggle({{ card.id }}, `{{ card.answer }}`);">
+            <div class="card-body">
                <div class="row">
                   <div class="my-col col-1 mr-3">
                     <!-- Placeholder -->
@@ -121,6 +132,8 @@
         </div>
       </div>
     </div>
+  </div>
+
 
 {% endfor %}
 
@@ -145,73 +158,6 @@
                     {% else %}
                         <div class="carousel-item  ">
                     {% endif %}
-                      <!-- This is what I'm working with. I should work from this -->
-                         <div class="card study-card">
-                          <div class="card-header">
-                            <div class="row">
-                              <div class="col-1 my-col mr-1"> <!-- Image -->
-                                <img class = "float:left mr-2 mt-1 small-profile-picture" src ="{{ card.creator.profile.image.url }}" >
-                              </div>
-                              <div class="col my-col ml-3"> <!-- Name and data -->
-                                <div class="row"> <!-- Name -->
-                                  <a class="text-primary"> {{ card.creator }}</a>
-                                </div>
-                                <div class="row mb-2 mt-n1"> <!-- Data -->
-                                  <small-text> <a class="text-muted small-text"> {{ card.date }}  </a> </small-text>
-                                </div>
-                                <div class="row mb-n2"> <!-- Question -->
-                                  <p class="float-up ml-n1"> {{ card.question }} </p>
-                                </div>
-                              </div> <!-- Header row ends -->
-                            </div>
-                          </div> <!-- header ends  -->
-
-                          <div class="card-body d-flex flex-column">
-                            <div class="row mb-">
-                              <div class="my-col col-1 mr-3 mb-2">
-                                <!-- Placeholder -->
-                              </div>
-                              <div class="my-col col my-container">
-                                <p class="ml-n3"> {{card.answer}} </p>
-                              </div>
-                              <div class="my-col col-1">
-                                <!-- Placeholder -->
-                              </div>
-                            </div> <!-- body row ends -->
-                            <div class="row">
-                              <div class="col text-center">
-
-                                <div class="row mt-auto">
-                                  <div class="col my-col">
-                                    <a href="javascript:{document.getElementById('remembered').submit()}">
-                                    <div class="align-self-end btn btn-success col-10 float-right"> Remembered </div> </a>
-                                  </div>
-                                  <div class="col my-col">
-                                    <a href="javascript:{document.getElementById('didnotremember').submit()}">
-                                    <div class="align-self-end btn btn-danger answer-button col-10 float-left">   Didn't Remember </div> </a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div> <!-- body ends -->
-                          <div class="card-footer text-muted">
-                            <div class="row mb-n2">
-                              <div class="col">
-                                 <p class="float-left"> <small> </small> </p>
-                              </div>
-                              <div class="col">
-                                 <p class="text-center"> <small>   </small> </p>
-                              </div>
-                              <div class="col">
-                                <p class="float-right"> <small>   </small> </p>
-                              </div>
-                            </div> <!-- footer row ends -->
-                          </div> <!-- footer ends -->
-                        </div> <!-- card end -->
-                        </div>
-                      </div>
-                      <!-- Here it ends -->
-                    </div>
 
                    <!--  Forms for the buttons -->
                       <form id="remembered" method="POST" action=" {% url 'remembered-from-study' card_id=card.id value=0 %} ">
@@ -233,15 +179,6 @@
                 {% endfor %}
             </div>
 
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
 
             </div>
         </div>
