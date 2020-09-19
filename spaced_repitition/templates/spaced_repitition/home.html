@@ -1,35 +1,28 @@
 {% extends "spaced_repitition/base.html" %}
-
+{% load static %}
 
 <style>
     /*.my-container {
         border: 1px solid green;
-    }
+    }*/
 
-    .my-row {
-        border: 3px solid red;
-    }
 
-    .my-column {
-        border: 3px dotted blue;
-    }
 
-    .my-container2 {
+  /*  .my-container2 {
         border-left: 1px solid green;
         border-top: 1px solid green;
         border-right: 1px solid green;
         border-radius: 15px 15px 0px 0px;
-    }*/
-
-    .flashcard {
-      height: 1000px;
     }
+*/
+
+
 
 </style>
 
 {% block content %}
 
-<body>
+<!-- <body>
   <script type="text/javascript">
 
   var clicked = false;
@@ -53,96 +46,119 @@
   }
 }
 
-</script>
+</script> -->
 
 
   <section>
     <div class="container my-container">
       <div class="row my-row">
-
         <div class="col-6 offset-2 my-column">
 
           </br></br></br>
           {% for card in cards reversed %}
-          <div class="card mb-3">
-            <div class="card-header">
-              <img class = "float:left mr-2 mt-1 small-profile-picture" src ="{{ card.creator.profile.image.url }}" >
-              <a class="mb-4 float-up"  > {{ card.creator }}</a>
-               <small> <p class=mt-2> {{ card.date }}  </p> </small>
-            </div> <!-- Card Header ender  -->
 
-            <!-- Here we have the questions and answers -->
-            <div onclick="toggle({{ card.id }}, `{{ card.answer }}`);" style="cursor: pointer;">
-              <div class="card-body mt-4">
-                <h5 class="card-title"> <a class="article-title">{{ card.question }}</a></h5>
-                <p id="card-{{card.id}}"> Click to see answer </p>
-                <!-- <p class="card-text"> {{ card.answer}} </p> -->
-              </div> <!-- Card body ender -->
-            </div>
+          <div class="card mb-3 shadow-sm">
+             <div class="card-header">
+                  <div class="row">
+                    <div class="col-1 mr-1 my-col"> <!-- Image -->
+                      <img class = "float:left mr-2 mt-1 small-profile-picture" src ="{{ card.creator.profile.image.url }}" >
+                    </div>
+                    <div class="col-9 ml-3 my-col"> <!-- Name and data -->
+                      <div class="row"> <!-- Name -->
+                        <a class="text-primary"> {{ card.creator }}</a>
+                      </div>
+                      <div class="row mb-2 mt-n1"> <!-- Data -->
+                        <small-text> <a class="text-muted small-text"> {{ card.date }}  </a> </small-text>
+                      </div>
+                      <div class="row mb-n2 study"> <!-- Question -->
+                        <p class="float-up"> {{ card.question }} </p>
+                      </div>
 
-            <div class="card-footer text-muted">
-
-              <!-- Here the dropdown starts -->
-              {% if user.is_authenticated %}
-              <div class="dropdown show float-right">
-                <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Add to Deck
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  {% for deck in decks %}
-                  <a class="dropdown-item"> <form class='Product-Form' method='post' action=" {% url 'copy_card' pk=deck.id card_id=card.id %} ">
-                      {% csrf_token %}
-                      <input name="deck_pk" value="{{ deck.pk }}" hidden>
-                      <button type="submit" class="btn">{{ deck.title }}</button>
-                  </form> </a>
-                  {% empty %}
-                  <a class="dropdown-item" href="{% url 'deck-create' %}"> Create deck </a>
-                  {% endfor %}
+                    </div> <!-- Header row ends -->
+                    <div class="col my-col">
+                        <!-- Here the dropdown starts -->
+                          {% if user.is_authenticated %}
+                          <div class="dropdown show float-right">
+                            <a class="btn dropdown-toggle add-to-deck mt-n1" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Add to deck
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                              {% for deck in decks %}
+                              <a class="dropdown-item"> <form class='Product-Form' method='post' action=" {% url 'copy_card' pk=deck.id card_id=card.id %} ">
+                                  {% csrf_token %}
+                                  <input name="deck_pk" value="{{ deck.pk }}" hidden>
+                                  <button type="submit" class="btn">{{ deck.title }}</button>
+                              </form> </a>
+                              {% empty %}
+                              <a class="dropdown-item" href="{% url 'deck-create' %}"> Create deck </a>
+                              {% endfor %}
+                            </div>
+                          </div>
+                          <!-- Here the dropdown ends -->
+                          {% else %}
+                          <div class="dropdown float-right">
+                              <button onclick="window.location.href='/register'"class="btn dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+                                Add to Deck
+                              </button>
+                            </div>
+                          {% endif %}
+                                  </div>
+                              </div>
+            </div> <!-- header ends  -->
+            <div class="card-body card-green ">
+                 <div class="row">
+                    <div class="my-col col-1 mr-3">
+                      <!-- Placeholder -->
+                    </div>
+                    <div class="my-col col study-card">
+                      <p class="ml-n3"> {{card.answer}}</p>
+                    </div>
+                    <div class="my-col col-1">
+                      <!-- Placeholder -->
+                    </div>
+                  </div> <!-- body row ends -->
+            </div> <!-- body ender -->
+            <div class="card-footer">
+                <div class="row mb-n2">
+                  <div class="col my-col">
+                    <p class="added-to-deck text-center"> 11 people added to deck</p>
+                  </div>
                 </div>
-              </div>
-              <!-- Here the dropdown ends -->
-              {% else %}
-              <div class="dropdown float-right">
-                  <button onclick="window.location.href='/register'"class="btn dropdown-toggle" type="button" id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
-                    Add to Deck
-                  </button>
-                </div>
-              {% endif %}
-
-
-
-
             </div> <!-- Footer ender  -->
           </div> <!-- Card ender  -->
-
-
-
-
           {% endfor %}
         </div> <!-- Column ender  -->
-
-
-<!--         This is the study cards button thingy  -->
-
-      <div class="col-md-4 my-column">
-        </br></br></br>
-          <div class="card flashcard">
-            <div class="card-body">
-              <h5 class="card-title"> Press Here to Study Daily Cards</h5>
-              <!-- Button trigger modal -->
-
-              <a class="btn btn-success mt-4 mb-3" href="{% url 'study-daily-cards'%}" role="button">Study Cards</a>
-
+        <div class="col-md-4 my-column">
+          </br></br></br>
+            <div class="card shadow-sm">
+              <div class="study-cards-card card-body ">
+                <p class="card-title"> Press here to study daily cards</p>
+                  <a class="btn btn-success btn-study-card mt-4 mb-3" href="{% url 'study-daily-cards'%}" role="button">Study Cards</a>
+              </div>
 
             </div>
-          </div>
-        </div>
-    </div>
-  </div>
-      </div>
 
-    </div>
-  </section>
+        </div>
+
+
+       <!--  <div class="col-md-4 my-column">
+          </br></br></br>
+            <div class="card flashcard">
+              <div class="card-body">
+                <h5 class="card-title"> Press Here to Study Daily Cards</h5>
+
+                <a class="btn btn-success mt-4 mb-3" href="{% url 'study-daily-cards'%}" role="button">Study Cards</a>
+
+              </div>
+            </div>
+          </div> -->
+
+        </div>
+      </div>
+    </div> <!-- Large col ender  -->
+
+  </div> <!-- row ender  -->
+</section>
 
 <!-- <script type="text/javascript">
                               function myFunction(id, answer) {

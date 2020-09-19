@@ -27,16 +27,7 @@
         border-right: 1px solid green;
         border-radius: 15px 15px 0px 0px;
     }
-
-    .pointy-mouse {
-      cursor: pointer;
-    }
-
-    .default-mouse {
-      cursor: default;
-    }
-
-
+border-bottom: 0.5px solid rgba(38,187,146,0.5);
 </style>
 
 <br>
@@ -72,13 +63,14 @@ function myFunction() {
 
 </script>
 
+
 {% for card in cards %}
 
 <div class="row">
   <div class="my-column
       col-xl-6 mt-2 mx-auto">
         <div class="card-group">
-          <div class="card">
+          <div class="card shadow">
             <div class="card-header">
               <div class="row">
                 <div class="col-1 my-col mr-1"> <!-- Image -->
@@ -100,7 +92,7 @@ function myFunction() {
             </div> <!-- header ends  -->
 
             <div class="pointy-mouse" id="myDIV" onclick="toggle({{ card.id }}, `{{ card.answer }}`);">
-            <div class="card-body">
+            <div class="card-body card-green">
                <div class="row">
                   <div class="my-col col-1 mr-3">
                     <!-- Placeholder -->

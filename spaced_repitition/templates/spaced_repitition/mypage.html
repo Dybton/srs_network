@@ -1,48 +1,30 @@
 {% extends "spaced_repitition/base.html" %}
+{% load static %}
 {%  block content %}
-<body style background="red">
+
+
+
+
 </br>
 </br>
-</br>
-</br>
 
-
-
-<!-- Find other solution to the above
- -->
-
-<!-- <style>
-    .my-container {
-        border: 1px solid green;
-    }
-
-    .my-row {
-        border: 3px solid red;
-    }
-
-    .my-column {
-        border: 3px dotted blue;
-    }
-
-    .my-container2 {
-        border-left: 1px solid green;
-        border-top: 1px solid green;
-        border-right: 1px solid green;
-        border-radius: 15px 15px 0px 0px;
-    }
-
-</style> -->
+<body style="background-color: white">
 
 <section>
+
+    <div class="container-fluid my-container colored-div">
+    </div>
+
     <div class="container my-container">
-        <div class="row my-row mb-4">
+
+        <div class="row my-row mb-4 mt-n6"> <!-- Name + picture -->
             <div class="my-column
             col-xl-1 offset-xl-2
             mr-xl-5
             col-lg-3 offset-lg-2
             col-md-3 offset-md-3
             col-sm-6
-            col-6
+            col-6 col
             ">
                 <img src="{{ user.profile.image.url }}" class="large-profile-picture" >
             </div>
@@ -53,94 +35,93 @@
             col-sm-6
             col-6
             mt-3
-            ">
-                <h1>{{ user }}</h1>
-            </div> <!--  I need to use padding or something instead -->
-        </div>
+            ml-n3 col">
+                <h2 class="light-header">{{ user }}</h2>
+            </div>
+        </div> <!-- Name + picture end  -->
 
-        <div class="row my-row">
-            <div class="my-column
-            col-xl offset-xl-2
-            ">
+        <div class="row mt-n4"> <!-- Description -->
+            <div class="col col-3 mr-4"> <!-- Placeholder --> </div>
+            <div class="col ml-2">
+                <p class="mr-n4"> {{user.description}} I’m really into baseball. But I also like football. But my real passion is petang </p>
+            </div>
+        </div> <!-- Description end -->
+
+        <div class="row my-row"> <!-- Buttons row -->
+            <div class="col-1 ml-4_5 "> </div>
+            <div class="col col-xl-1 offset-xl-2 offset-xl-2 mr-n1  ">
+                <a href="{% url 'deck-create' %}"> <!-- <button class="btn-icon"> --> <img class="medium-small-picture mt-2" src =" {% static '/my_icons/newcard.png' %}"> <!-- </button> -->  </a>
             </div>
 
-        </div>
-
-        <div class="row my-row">
-            <div class="my-column
-            col-xl offset-xl-2
-            ">
-               <!--  <p> Followers: 89 Following: 32</p> -->
+            <div class="col-1 col-xl-2 ml-n4">
+                <a class="nav-item nav-link" href="{% url 'study-daily-cards'%}"> <button class= "btn btn-success btn-study-card "> Study Cards </button> </a>
             </div>
-        </div>
-
-        <div class="row my-row">
-            <div class="my-column
-            col-xl-2 offset-xl-2
-            ">
-                <a class="nav-item nav-link float-left" href="{% url 'deck-create' %}"> <button class= "btn btn-primary"> New Deck </button></a>
-
-            </div>
-
-            <div class="my-column
-            col-xl-2
-            ">
-                <a class="nav-item nav-link" href="{% url 'study-daily-cards'%}"> <button class= "btn btn-success"> Study Cards </button></a>
-
-            </div>
-
-            <!-- <div class="my-column
-            col-xl
-            ">
-                <a class="btn btn-success" href="{% url 'study-daily-cards'%}" role="button">Study Daily Cards</a>
-            </div> -->
-        </div>
+        </div> <!-- Buttons row end  -->
 
     </div>
 
-    <div class="container my-container2 mt-5">
+    <div class="col-11 container my-deck-contaioner mt-4"> <!-- container start  -->
         <div class="row">
-            <div class="my-column
-            col-xl-2 mx-auto
-            ">
-                <h2 class="mt-3 mb-4"> My Decks </h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="my-column
-            col-xl-12 mx-auto
-            ">
-                <hr>
-            </div>
-        </div>
-
-    <div class="row mt-1 mb-4">
-        {% for deck in decks reversed %}
-            <div class="my-column
-            col-xl-4 mt-4">
-                <div class="card d-flex flash-card">
-                  <div class="card-body">
-                    <h5 class="card-title"> {{deck.title}} </h5>
-                    <!-- <p class="card-text">{{deck.description}}</p> -->
-                        <a href="{% url 'mypage-study-deck' deck.id %}">
-                            <button type="button" class="btn btn-success">
-                              Study this Deck
-                            </button>
-                            <br>
-                            <br>
-                        <a href="{% url 'card-create' deck_id=deck.id %}" >
-                            Add New Card
-                        </a>
-                  </div>
+            <div class="col-1"> <!-- Placeholder --> </div>
+            <div class="col">
+                <!-- Meat and potatoes -->
+                <div class="row">
+                    <div class="col">
+                        <h4 class="text-center mt-4 mb-4 light-header"> My decks </h4>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+                 <div class="row mx-auto">
+                    {% for deck in decks reversed %}
+                        <div class="col-6 my-col ">
+                            <div class="card d-flex deck-card mx-auto mt-4 shadow-sm">
+                                <div class="card-body card-green">
+                                    <div class="row">
+                                        <div class="col my-col">
+                                            <h5 class="card-title light-header"> {{deck.title}} </h5>
+                                        </div>
+                                        <!-- <div class="col">
+                                            Lock
+                                        </div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                           <p class="text-muted medium-small-text"> 9 cards </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer card-green">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="{% url 'mypage-study-deck' deck.id %}">
+                                                <p> Study deck </p>
+                                            </a>
+                                        </div>
+                                        <div class="col my-col ">
+                                            <a href="{% url 'card-create' deck_id=deck.id %}" >
+                                                <img class="small-picture mt-2" src =" {% static '/my_icons/addcard2.png' %}"> <!-- </button> -->
+                                            </a>
+                                        </div>
+                                        <!-- <div class="col">
+                                            Edit
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                    </div>
+                    <div class="col-1"> <!-- Placeholder --> </div>
+                </div>
+
+    </div> <!-- Container end  -->
+
+
 
 
     </br>
         </br>
             </br>
-
 
     </div>
 
