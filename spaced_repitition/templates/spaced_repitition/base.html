@@ -75,7 +75,8 @@
 
   .card-footer {
     background-color: rgba(246,252,251);
-    border-top: none;
+    border-top: 1px;
+
 
   }
 
@@ -232,15 +233,26 @@ height: 30px;
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href=" {% url 'spaced_repitition-home' %} ">Home</a>
-              <a class="nav-item nav-link" href="{% url 'spaced_repitition-mypage' %}"> Mypage</a>
+              <a class="nav-item nav-link" href=" {% url 'spaced_repitition-home' %} ">Startpage</a>
+              <!-- <a class="nav-item nav-link" href="{% url 'spaced_repitition-mypage' %}"> Mypage</a> -->
           </div>
           <!-- Navbar Right Side -->
           <div class="navbar-nav">
               {% if user.is_authenticated %}
 
-                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a> <!-- Place a picture here with time -->
-                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                <a class="nav-item nav-link" href="{% url 'spaced_repitition-mypage' %}"> <img src="{{ user.profile.image.url }}" class="small-picture" > </a> <!-- Place a picture here with time -->
+                <!-- <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a> Place a picture here with time -->
+                <!-- <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a> -->
+               <li class="nav-item dropdown mt-1">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right mt-2" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-cog"></i> Account Settings</a>
+                  <a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+              </li>
+
+
               {% else %}
                 <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                 <a class="nav-item nav-link" href=" {% url 'register' %}">Register</a>

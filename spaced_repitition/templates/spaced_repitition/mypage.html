@@ -72,8 +72,8 @@
                 </div>
                  <div class="row mx-auto">
                     {% for deck in decks reversed %}
-                        <div class="col-6 my-col ">
-                            <div class="card d-flex deck-card mx-auto mt-4 shadow-sm">
+                        <div class="col-6 my-col">
+                            <div class="card d-flex deck-card mx-auto mt-4 shadow-sm ">
                                 <div class="card-body card-green">
                                     <div class="row">
                                         <div class="col my-col">
@@ -92,13 +92,13 @@
                                 <div class="footer card-green">
                                     <div class="row">
                                         <div class="col">
-                                            <a href="{% url 'mypage-study-deck' deck.id %}">
-                                                <p> Study deck </p>
+                                            <a href="{% url 'mypage-study-deck' deck.id %}" class="stretched-link">
+                                                <p class="ml-3"> Study deck </p>
                                             </a>
                                         </div>
                                         <div class="col my-col ">
                                             <a href="{% url 'card-create' deck_id=deck.id %}" >
-                                                <img class="small-picture mt-2" src =" {% static '/my_icons/addcard2.png' %}"> <!-- </button> -->
+                                                <img class="small-picture float-right mb-3 mt-n1 mr-3" src =" {% static '/my_icons/addcard2.png' %}"> <!-- </button> -->
                                             </a>
                                         </div>
                                         <!-- <div class="col">
