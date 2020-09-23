@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from . models import Card, Deck, User
+from . models import Card, Deck, User, Added
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
@@ -25,10 +25,21 @@ class CardListView(ListView):
         return context
 
 
-def copy_card(request, pk, card_id):
+def copy_card(request, pk, card_id,):
     deck_id = pk
     deck = get_object_or_404(Deck, pk=deck_id)
     card = get_object_or_404(Card, pk=card_id)
+    try:
+        added = Added.objects.get(card=card_id, user=request.user)
+    except Added.DoesNotExist:
+        added = None
+    if added is None:
+        card = Card.objects.get(id=card_id)
+        added = Added(card=card, user=request.user)
+        card.times_added += 1
+        added.save()
+        card.save()
+    card.save()
     card.pk = None
     card.save()
     card.days_till_study = 1
@@ -49,7 +60,7 @@ class CardCreateView(LoginRequiredMixin, CreateView):
     fields = ['question', 'answer']
 
     def form_valid(self, form):
-        #card = self.get_object()
+        # card = self.get_object()
         form.instance.creator = self.request.user
         deck = get_object_or_404(Deck, pk=self.kwargs['deck_id'])
         form.save()
@@ -59,7 +70,7 @@ class CardCreateView(LoginRequiredMixin, CreateView):
         # print("YO!")
         # So what I need to do, is to pass the deck Id to this
         # deck_id = self.request.Deck
-        #deck_id = 2
+        # deck_id = 2
         # self.assign_card(deck_id)
 
         # deck = get_object_or_404(Deck, slug=self.kwargs[deck_id])
@@ -167,6 +178,14 @@ class DeckListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Deck.objects.filter(creator=self.request.user)
+
+    # def get_context_data(self, *args, **kwargs):
+    #     deck = self.get_object()
+    #     deck_title = deck.title
+    #     context = super(DeckDetailView, self).get_context_data(*args, **kwargs)
+    #     context['cards'] = Card.objects.filter(
+    #         decks__title='ASdasd').filter(days_till_study=1).count()
+    #     return context
 
 
 class DeckDetailView(LoginRequiredMixin, DetailView):

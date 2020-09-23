@@ -24,6 +24,15 @@ class Card(models.Model):
     #decks = models.ForeignKey(Deck, on_delete=models.CASCADE, default=1)
     days_till_study = models.IntegerField(default=1)
     copied = models.BooleanField(default=False)
+    times_added = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.question + ' pk: ' + str(self.pk)
+
+
+class Added(models.Model):
+    card = models.ForeignKey(Card, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.question + ' pk: ' + str(self.pk)

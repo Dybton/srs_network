@@ -60,74 +60,8 @@ function myFunction() {
 }
 
 
-
 </script>
 
-
-{% for card in cards %}
-
-<div class="row">
-  <div class="my-column
-      col-xl-6 mt-2 mx-auto">
-        <div class="card-group">
-          <div class="card shadow">
-            <div class="card-header">
-              <div class="row">
-                <div class="col-1 my-col mr-1"> <!-- Image -->
-                  <img class = "float:left mr-2 mt-1 small-profile-picture" src ="{{ card.creator.profile.image.url }}" >
-                </div>
-                <div class="col my-col ml-3"> <!-- Name and data -->
-                  <div class="row"> <!-- Name -->
-                    <a class="text-primary"> {{ card.creator }}</a>
-                  </div>
-                  <div class="row mb-2 mt-n1"> <!-- Data -->
-                    <small-text> <a class="text-muted small-text"> {{ card.date }}  </a> </small-text>
-                  </div>
-                  <div class="row mb-n2 study"> <!-- Question -->
-                    <p class="float-up ml-n1"> {{ card.question }} </p>
-
-                  </div>
-                </div> <!-- Header row ends -->
-              </div>
-            </div> <!-- header ends  -->
-
-            <div class="pointy-mouse" id="myDIV" onclick="toggle({{ card.id }}, `{{ card.answer }}`);">
-            <div class="card-body card-green">
-               <div class="row">
-                  <div class="my-col col-1 mr-3">
-                    <!-- Placeholder -->
-                  </div>
-                  <div class="my-col col study-card">
-                    <p id="card-{{card.id}}" class="ml-n3"> Click to see answer </p>
-                  </div>
-                  <div class="my-col col-1">
-                    <!-- Placeholder -->
-                  </div>
-                </div> <!-- body row ends -->
-              <div class="row mb-3">
-                <div class="col"> </div>
-              </div>
-              <div class="row mt-auto">
-                <div class="col button-margins">
-                  <a href="javascript:{document.getElementById('remembered').submit()}">
-                  <div class="align-self-end btn btn-success btn-sm col-10 float-right text-right"> <img class = "super-small-picture float-left" src =" {% static '/my_icons/check6.png' %} "> Remembered </div> </a>
-                </div>
-                <div class="col button-margins">
-                  <a href="javascript:{document.getElementById('didnotremember').submit()}">
-                  <div class="align-self-end btn btn-danger btn-sm col-10 float-left text-right "> <img class = "super-small-picture float-left" src ="{% static '/my_icons/refresh5.png' %}" > Didn't Remember </div> </a>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-{% endfor %}
 
 <div class="row">
   <div class="my-column
@@ -150,6 +84,61 @@ function myFunction() {
                     {% else %}
                         <div class="carousel-item  ">
                     {% endif %}
+
+                   <!--  It's here I need to get it to wokr -->
+                   <div class="card-group">
+                      <div class="card shadow">
+                        <div class="card-header">
+                          <div class="row">
+                            <div class="col-1 my-col mr-1"> <!-- Image -->
+                              <img class = "float:left mr-2 mt-1 small-profile-picture" src ="{{ card.creator.profile.image.url }}" >
+                            </div>
+                            <div class="col my-col ml-3"> <!-- Name and data -->
+                              <div class="row"> <!-- Name -->
+                                <a class="text-primary"> {{ card.creator }}</a>
+                              </div>
+                              <div class="row mb-2 mt-n1"> <!-- Data -->
+                                <small-text> <a class="text-muted small-text"> {{ card.date }}  </a> </small-text>
+                              </div>
+                              <div class="row mb-n2 study"> <!-- Question -->
+                                <p class="float-up ml-n1"> {{ card.question }} </p>
+
+                              </div>
+                            </div> <!-- Header row ends -->
+                          </div>
+                        </div> <!-- header ends  -->
+
+                        <div class="pointy-mouse" id="myDIV" onclick="toggle({{ card.id }}, `{{ card.answer }}`);">
+                        <div class="card-body card-green">
+                           <div class="row">
+                              <div class="my-col col-1 mr-3">
+                                <!-- Placeholder -->
+                              </div>
+                              <div class="my-col col study-card">
+                                <p id="card-{{card.id}}" class="ml-n3"> Click to see answer </p>
+                              </div>
+                              <div class="my-col col-1">
+                                <!-- Placeholder -->
+                              </div>
+                            </div> <!-- body row ends -->
+                          <div class="row mb-3">
+                            <div class="col"> </div>
+                          </div>
+                          <div class="row mt-auto">
+                            <div class="col button-margins">
+                              <a href="javascript:{document.getElementById('remembered').submit()}">
+                              <div class="align-self-end btn btn-success btn-sm col-10 float-right text-right"> <img class = "super-small-picture float-left" src =" {% static '/my_icons/check6.png' %} "> Remembered </div> </a>
+                            </div>
+                            <div class="col button-margins">
+                              <a href="javascript:{document.getElementById('didnotremember').submit()}">
+                              <div class="align-self-end btn btn-danger btn-sm col-10 float-left text-right "> <img class = "super-small-picture float-left" src ="{% static '/my_icons/refresh5.png' %}" > Didn't Remember </div> </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                      </div>
+                    </div>
 
                    <!--  Forms for the buttons -->
                       <form id="remembered" method="POST" action=" {% url 'remembered-from-study' card_id=card.id value=0 %} ">

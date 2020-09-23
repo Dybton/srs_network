@@ -1,4 +1,5 @@
 {% extends "spaced_repitition/base.html" %}
+{% load static %}
 {%  block content %}
 
 
@@ -12,22 +13,21 @@
         border: 1px solid green;
     }*/
 
-    /*.row {
+    /*.my-row {
         border: 3px solid red;
     }
 
-    .col {
+    .my-col {
         border: 3px dotted blue;
     }*/
 
-   /* .my-container2 {
+    .my-container2 {
         border-left: 1px solid green;
         border-top: 1px solid green;
         border-right: 1px solid green;
         border-radius: 15px 15px 0px 0px;
-    }*/
-
-
+    }
+border-bottom: 0.5px solid rgba(38,187,146,0.5);
 </style>
 
 <br>
@@ -42,20 +42,30 @@
     if(!clicked){
       clicked = true;
       document.getElementById(`card-${id}`).innerHTML = answer;
-      document.getElementById(`buttons-${id}`).style.display = "block";
-
+      document.getElementById("myDIV").className = "default-mouse";
     }
-    else{
-      clicked = false;
-      document.getElementById(`card-${id}`).innerHTML = "Click to see answer";
-      document.getElementById(`buttons-${id}`).style.display = "none";
-    }
+    // else{
+    //   clicked = false;
+    //   document.getElementById(`card-${id}`).innerHTML = "Click to see answer";
+    // }
   }
+
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+
 </script>
+
 
 <div class="row">
   <div class="my-column
-      col-xl-6 mt-2 mx-auto ">
+      col-xl-6 mt-2 mx-auto">
      <div id="carouselExampleIndicators" class="carousel" data-ride="carousel">
             <ol class="carousel-cards" style="list-style: none;">
                 {% for card in cards %}
@@ -74,81 +84,82 @@
                     {% else %}
                         <div class="carousel-item  ">
                     {% endif %}
-                      <!-- This is what I'm working with. I should work from this -->
-                      <div class="card study-card">
+
+                   <!--  It's here I need to get it to wokr -->
+                   <div class="card-group">
+                      <div class="card shadow">
                         <div class="card-header">
                           <div class="row">
-                            <div class="col-1 mr-4">
+                            <div class="col-1 my-col mr-1"> <!-- Image -->
                               <img class = "float:left mr-2 mt-1 small-profile-picture" src ="{{ card.creator.profile.image.url }}" >
                             </div>
-                            <div class="col ml-1">
+                            <div class="col my-col ml-3"> <!-- Name and data -->
+                              <div class="row"> <!-- Name -->
+                                <a class="text-primary"> {{ card.creator }}</a>
+                              </div>
+                              <div class="row mb-2 mt-n1"> <!-- Data -->
+                                <small-text> <a class="text-muted small-text"> {{ card.date }}  </a> </small-text>
+                              </div>
+                              <div class="row mb-n2 study"> <!-- Question -->
+                                <p class="float-up ml-n1"> {{ card.question }} </p>
 
-                              <div class="row">
-                                <a> {{ card.creator }}</a>
                               </div>
-                              <div class="row">
-                                <small> <p> {{ card.date }}  </p> </small>
+                            </div> <!-- Header row ends -->
+                          </div>
+                        </div> <!-- header ends  -->
+
+                        <div class="pointy-mouse" id="myDIV" onclick="toggle({{ card.id }}, `{{ card.answer }}`);">
+                        <div class="card-body card-green">
+                           <div class="row">
+                              <div class="my-col col-1 mr-3">
+                                <!-- Placeholder -->
                               </div>
+                              <div class="my-col col study-card">
+                                <p id="card-{{card.id}}" class="ml-n3"> Click to see answer </p>
+                              </div>
+                              <div class="my-col col-1">
+                                <!-- Placeholder -->
+                              </div>
+                            </div> <!-- body row ends -->
+                          <div class="row mb-3">
+                            <div class="col"> </div>
+                          </div>
+                          <div class="row mt-auto">
+                            <div class="col button-margins">
+                              <a href="javascript:{document.getElementById('remembered').submit()}">
+                              <div class="align-self-end btn btn-success btn-sm col-10 float-right text-right"> <img class = "super-small-picture float-left" src =" {% static '/my_icons/check6.png' %} "> Remembered </div> </a>
+                            </div>
+                            <div class="col button-margins">
+                              <a href="javascript:{document.getElementById('didnotremember').submit()}">
+                              <div class="align-self-end btn btn-danger btn-sm col-10 float-left text-right "> <img class = "super-small-picture float-left" src ="{% static '/my_icons/refresh5.png' %}" > Didn't Remember </div> </a>
                             </div>
                           </div>
-                          </div> <!-- Card Header ender  -->
-
-                        <div onclick="toggle({{ card.id }},'{{ card.answer }}');" style="cursor: pointer;">
-                          <div class="card-body col">
-                            <div class="row">
-                              <div class="col offset-1">
-                                <div class="row">
-                                  <div class="col my-container ml-2">
-                                    <h5 class="card-title"> <a class="article-title">{{ card.question }}</a></h5>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                    <p class="mx-auto" id="card-{{card.id}}"> Click to see answer </p>
-                                </div>
-                                <div class="row toggle-content" id="buttons-{{card.id}}">
-                                    <div class="col  ml-2 my-container">
-                                      <a href="javascript:{document.getElementById('remembered').submit()}">
-                                      <div class="btn btn-success col-5"> Remembered </div> </a>
-                                      <a href="javascript:{document.getElementById('didnotremember').submit()}">
-                                      <div class="btn btn-danger col-5">  Didn't Remember </div> </a>
-                                    </div>
-                                  </div> <!-- Both buttons ends  -->
-                                </div>
-                              </div>
-                            </div>
-                          </div> <!-- Card body ender -->
                         </div>
+                        <div class="card-footer">
                         </div>
                       </div>
-                      <!-- Here it ends -->
                     </div>
 
                    <!--  Forms for the buttons -->
-                     <form id="remembered" method="POST" action=" {% url 'remembered' pk=deck.id card_id=card.id value=0 %} ">
-                      {% csrf_token %}
-                      <input type ="hidden">
-                    </form>
-                    <form id="didnotremember" method="POST" action=" {% url 'remembered' pk=deck.id card_id=card.id value=1 %} ">
-                      {% csrf_token %}
-                      <input type ="hidden">
-                    </form>
+                      <form id="remembered" method="POST" action=" {% url 'remembered-from-study' card_id=card.id value=0 %} ">
+                          {% csrf_token %}
+                          <input type ="hidden">
+                      </form>
+                      <div>
+                        <form id="didnotremember" method="POST" action=" {% url 'remembered-from-study' card_id=card.id value=1 %} ">
+                          {% csrf_token %}
+                          <input type ="hidden">
+                        </form>
+                      </div>
 
-                {% empty %}
+                  {% empty %}
                   <p> No cards are due </p>
-                  <a href="{% url 'card-create' deck_id=deck.id %}" > Add New Card </a>
+                  <p> Find new cards on the <a href="{% url 'spaced_repitition-home' %}"> feed </a> </p>
+                  <p> Or go to <a href="{% url 'spaced_repitition-mypage' %}"> mypage </a> to create more cards </p>
 
                 {% endfor %}
             </div>
 
-            <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a> -->
 
             </div>
         </div>
@@ -157,3 +168,7 @@
 
 
 {% endblock content %}
+
+
+
+
