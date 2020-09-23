@@ -59,14 +59,12 @@ function myFunction() {
   }
 }
 
-
 </script>
-
 
 <div class="row">
   <div class="my-column
       col-xl-6 mt-2 mx-auto">
-     <div id="carouselExampleIndicators" class="carousel" data-ride="carousel">
+     <div id="carouselExampleIndicators" class="carousel shadow" data-ride="carousel">
             <ol class="carousel-cards" style="list-style: none;">
                 {% for card in cards %}
                     {% if forloop.first %}
@@ -87,7 +85,7 @@ function myFunction() {
 
                    <!--  It's here I need to get it to wokr -->
                    <div class="card-group">
-                      <div class="card shadow">
+                      <div class="card">
                         <div class="card-header">
                           <div class="row">
                             <div class="col-1 my-col mr-1"> <!-- Image -->
@@ -127,11 +125,11 @@ function myFunction() {
                           <div class="row mt-auto">
                             <div class="col button-margins">
                               <a href="javascript:{document.getElementById('remembered').submit()}">
-                              <div class="align-self-end btn btn-success btn-sm col-10 float-right text-right"> <img class = "super-small-picture float-left" src =" {% static '/my_icons/check6.png' %} "> Remembered </div> </a>
+                              <div class="align-self-end btn btn-success btn-answer-card btn-sm col-10 float-right text-right"> <img class = "super-small-picture float-left" src =" {% static '/my_icons/check6.png' %} "> Remembered </div> </a>
                             </div>
                             <div class="col button-margins">
                               <a href="javascript:{document.getElementById('didnotremember').submit()}">
-                              <div class="align-self-end btn btn-danger btn-sm col-10 float-left text-right "> <img class = "super-small-picture float-left" src ="{% static '/my_icons/refresh5.png' %}" > Didn't Remember </div> </a>
+                              <div class="align-self-end btn btn-danger btn-answer-card btn-sm col-10 float-left text-right "> <img class = "super-small-picture float-left" src ="{% static '/my_icons/refresh5.png' %}" > Didn't Remember </div> </a>
                             </div>
                           </div>
                         </div>
