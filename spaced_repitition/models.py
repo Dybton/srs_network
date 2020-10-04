@@ -25,6 +25,7 @@ class Card(models.Model):
     days_till_study = models.IntegerField(default=1)
     copied = models.BooleanField(default=False)
     times_added = models.IntegerField(default=0)
+    leitner_box = models.IntegerField(default=1)
 
     def __str__(self):
         return self.question + ' pk: ' + str(self.pk)

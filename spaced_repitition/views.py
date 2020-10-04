@@ -205,11 +205,23 @@ def remembered(request, pk, card_id, value):
     deck_id = pk
     card = get_object_or_404(Card, pk=card_id)
     if value is 0:
-        card.days_till_study = card.days_till_study * 2
+        if card.leitner_box is 1:
+            card.days_till_study = 3
+        elif card.leitner_box is 2:
+            card.days_till_study is 7
+        elif card.leitner_box is 3:
+            card.days_till_study = 14
+        elif card.leitner_box is 4:
+            card.days_till_study = 30
+        elif card.leitner_box is 5:
+            card.days_till_study = 60
+        elif card.leitner_box is 6:
+            card.days_till_study = 120
+        card.leitner_box += 1
         card.save()
-        print(value)
     else:
         card.days_till_study = 2
+        card.leitner_box = 1
         card.save()
     return redirect('/mypage/' + str(deck_id))
 
@@ -219,11 +231,23 @@ def remembered(request, pk, card_id, value):
 def remembered_from_study(request, card_id, value):
     card = get_object_or_404(Card, pk=card_id)
     if value is 0:
-        card.days_till_study = card.days_till_study * 2
+        if card.leitner_box is 1:
+            card.days_till_study = 3
+        elif card.leitner_box is 2:
+            card.days_till_study is 7
+        elif card.leitner_box is 3:
+            card.days_till_study = 14
+        elif card.leitner_box is 4:
+            card.days_till_study = 30
+        elif card.leitner_box is 5:
+            card.days_till_study = 60
+        elif card.leitner_box is 6:
+            card.days_till_study = 120
+        card.leitner_box += 1
         card.save()
-        print(value)
     else:
         card.days_till_study = 2
+        card.leitner_box = 1
         card.save()
     return redirect('/study')
 
