@@ -44,7 +44,6 @@
       <div id="carouselExampleIndicators" class="carousel" data-ride="carousel"> <!-- Carrusel div  -->
         <ol class="carousel-cards" style="list-style: none;">
           {% for card in cards %}
-          <span class="d-none" id="leitnerboxValue">{{card.leitner_box}}</span>
               {% if forloop.first %}
                   <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.counter0}}" class="active"></li>
               {% else %}
@@ -189,6 +188,7 @@
                       <p class="text-center small-text"> You will see this card again in: </p>
                       <div class="text-center">
                         <div class="btn-group" role="group" aria-label="Basic example" id="btnId">
+                          <p id="demo"></p>
                           <button class="btn card-green leitnerboxes leitnerboxesRevealed">Tomorrow</button>
                           <button class="btn card-green leitnerboxes leitnerboxesRevealed">3 days</button>
                           <button class="btn card-green leitnerboxes leitnerboxesRevealed">1 week</button>
@@ -219,13 +219,20 @@
                   <input type ="hidden">
                 </form>
               </div>
+
               <!-- form for the buttons end  -->
+              <!-- <p class="d-none" id="leitnerboxValue">{{card.leitner_box}}</p> -->
+              <script type="text/javascript">
+                 var actualLeitnerbox = "{{card_leitner_box}}";
+              </script>
               {% empty %}
                 <p> No cards are due </p>
                 <p> Find new cards on the <a href="{% url 'spaced_repitition-home' %}"> feed </a> </p>
                 <p> Or go to <a href="{% url 'spaced_repitition-mypage' %}"> mypage </a> to create more cards </p>
+
           {% endfor %} <!-- For cards in cards reversed end -->
         </div> <!-- Inner Carrusel div ends -->
+
       </div> <!-- Carrusel div ends -->
   </div> <!-- Parent col ends -->
 </div> <!-- Parent row ends -->
@@ -249,8 +256,66 @@
   //  }
 
 
-  var actualLeitnerbox = 1;
-  var leitnerbox = actualLeitnerbox;
+  //var actualLeitnerbox = 3;
+
+  // actualLeitnerbox = 0;
+
+  invoke_make_blank = true;
+
+  // function getActualLeitnerbox() {
+  //   if (invoke_make_blank){
+  //      actualLeitnerbox = document.getElementById("leitnerboxValue").innerHTML;
+  //      invoke_make_blank = false;
+  //   }
+  // }
+  // getActualLeitnerbox();
+
+
+
+  // Note having the function activate on click doesn't show tomorrow from the get go, but having the function activate
+  // below the function does
+  // Now I just have to deal with the many leitnerboxes that are activatet
+
+  // If I enter value manually in the span class I get the same error, the bar is filled out
+  // If I enter the value manually in the js, It works fine.
+  // so the problem is getting the value from the html to the javascript
+  // What is my next action?
+  // First, i'll take a 10 minutes break
+  // Then i'll install the sublime log
+
+
+
+  // Pass all of the cards to js script
+  // Filter based on card id, which is send to JS from the HTML dom
+  // Use that value to show what needs to be shwon
+
+  // actualLeitnerbox = document.getElementById("leitnerboxValue").innerHTML;
+  // // actualLeitnerbox = 1;
+
+  // function coder() {
+  //   if (actualLeitnerbox === 1) {
+  //     codedLeitnerbox = 'A';
+  //   }
+  // }
+  // coder();
+
+  // function decoder() {
+  //   if (codedLeitnerbox === 'A') {
+  //     uncodedLeitnerbox = 1;
+  //   }
+  // }
+  // decoder();
+  // console.log(uncodedLeitnerbox)
+
+
+
+  // actualLeitnerbox = ;
+
+  {% for card in cards reversed %}
+    actualLeitnerbox = {{card.leitner_box}};
+  {% endfor %}
+
+  leitnerbox = actualLeitnerbox;
 
   function rememberedHovered() {
       leitnerbox += 1;
