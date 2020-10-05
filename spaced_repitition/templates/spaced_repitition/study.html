@@ -29,58 +29,14 @@
   border-bottom: 0.5px solid rgba(38,187,146,0.5);
 </style>
 
-<script type="text/javascript">
-  function myFunction() {
-     var mainFrameOne = document.getElementById("mainFrameOne");
-     var mainFrameTwo = document.getElementById("mainFrameTwo");
 
-     mainFrameOne.style.display = (
-         mainFrameOne.style.display == "none" ? "block" : "none");
-     mainFrameTwo.style.display = (
-         mainFrameTwo.style.display == "none" ? "block" : "none");
-  }
-
-  // Leitnerbox functionality
-
-  var actualLeitnerbox = 4;
-  var leitnerbox = actualLeitnerbox;
-
-  function rememberedHovered() {
-      leitnerbox += 1;
-      activate();
-  }
-
-  function rememberedNotHovered() {
-      leitnerbox = actualLeitnerbox;
-      activate();
-  }
-
-  function didNotRememberHovered() {
-      leitnerbox = 1;
-      activate();
-  }
-
-  function didNotRememberNotHovered() {
-      leitnerbox = actualLeitnerbox;
-      activate();
-  }
-  function activate(){
-  var header = document.getElementById("myDIV");
-  var btns = header.getElementsByClassName("btn");
-  for(let i = 0; i < btns.length; i++){
-      btns[i].classList.remove("active");
-  }
-  for (var i = 0; i < leitnerbox; i++) {
-    btns[i].classList.add("active");
-    }
-  }
-  activate();
-</script>
 
 <br>
 <br>
 <br>
 <br>
+
+<body>
 
 <div class="row"> <!-- Parent row  -->
   <div class="my-column
@@ -88,6 +44,7 @@
       <div id="carouselExampleIndicators" class="carousel" data-ride="carousel"> <!-- Carrusel div  -->
         <ol class="carousel-cards" style="list-style: none;">
           {% for card in cards %}
+          <span class="d-none" id="leitnerboxValue">{{card.leitner_box}}</span>
               {% if forloop.first %}
                   <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.counter0}}" class="active"></li>
               {% else %}
@@ -104,7 +61,7 @@
                 <div class="carousel-item  ">
             {% endif %}
               <div class="row"> <!-- Row that holds the mainframe -->
-                <div class="col pointy-mouse" id="mainFrameOne" onclick="myFunction()" > <!-- Col  that holds the mainframe -->
+                <div class="col pointy-mouse" id="mainFrameOne" onclick="myFunction();activate();" > <!-- Col  that holds the mainframe -->
                   <div class="card-group"> <!-- Card group  -->
                     <div class="card"> <!-- Card -->
                       <div class="card-header  ">
@@ -173,15 +130,163 @@
                     </div> <!-- Col that ends the leitnerboxes  -->
                   </div> <!-- ends the leitnerboxes  -->
                 </div> <!-- Col  that ends the mainframe-->
+                <div class="col" id="mainFrameTwo" style="display:none;">
+                  <div class="card-group"> <!-- Card group  -->
+                    <div class="card"> <!-- Card -->
+                      <div class="card-header  ">
+                        <div class="row"> <!-- Row below card header  -->
+                          <div class="col-1 my-col mr-1"> <!-- Image -->
+                            <img class = "float:left mr-2 mt-1 small-profile-picture" src ="{{ card.creator.profile.image.url }}" >
+                          </div>
+                          <div class="col my-col ml-3"> <!-- Name and date -->
+                            <div class="row"> <!-- Name -->
+                              <a class="text-primary"> {{ card.creator }}</a>
+                            </div> <!-- Name end -->
+                          <div class="row mb-2 mt-n1"> <!-- Date -->
+                            <small-text> <a class="text-muted small-text"> {{ card.date }}  </a> </small-text>
+                          </div> <!-- Date end-->
+                          <div class="row mb-n2 study"> <!-- Question -->
+                            <p class="float-up ml-n1"> {{ card.question }} </p>
+                          </div> <!-- Question end -->
+                        </div> <!-- Row below card header ends  -->
+                      </div> <!-- Card header ends -->
+                      </div> <!-- Card header ends 2 (don't know which one it is) -->
+                      <div class="card-body card-green "> <!-- Card body   -->
+                        <div class="row"> <!-- Card body row  -->
+                          <div class="my-col col-1 mr-3">
+                            <!-- Placeholder -->
+                          </div>
+                          <div class="my-col col study-card">
+                            <p class="ml-n3 text-center mt-4"> Click anywhere to see answer </p>
+                          </div>
+                          <div class="my-col col-1">
+                            <!-- Placeholder -->
+                          </div>
+                        </div> <!-- card body row ends -->
+                        <div class="row mb-3">  <!-- placeholder between body row and button row begins -->
+                            <div class="col"> <!-- placeholder between body row and button row --> </div>
+                        </div> <!-- placeholder between body row and button row ends -->
+                          <div class="row mt-auto"> <!-- Button row begings -->
+                            <div class="col button-margins">
+                              <a href="javascript:{document.getElementById('remembered').submit()}">
+                              <div class="align-self-end btn btn-success btn-answer-card btn-sm col-10 float-right text-right" onmouseover="rememberedHovered()" onmouseout="rememberedNotHovered()"> <img class = "super-small-picture float-left" src =" {% static '/my_icons/check6.png' %} "> Remembered </div> </a>
+                            </div>
+                            <div class="col button-margins">
+                              <a href="javascript:{document.getElementById('didnotremember').submit()}">
+                              <div class="align-self-end btn btn-danger btn-answer-card btn-sm col-10 float-left text-right" onmouseover="didNotRememberHovered()" onmouseout="didNotRememberNotHovered()"> <img class = "super-small-picture float-left" src ="{% static '/my_icons/refresh5.png' %}" > Didn't Remember </div> </a>
+                            </div>
+                          </div> <!-- Button row ends  -->
+                      </div> <!-- Card body ends -->
+                      <div class="card-footer">
+                            <!-- placeholder  -->
+                      </div> <!-- Card footer ends  -->
+                    </div> <!-- Card ends -->
+                  </div> <!-- Card group ends -->
+                  </br>
+                  <div class="row"> <!-- Row that holds the leitnerboxes  -->
+
+                    <div class="col"> <!-- Col that holds the leitnerboxes  -->
+                      <p class="text-center small-text"> You will see this card again in: </p>
+                      <div class="text-center">
+                        <div class="btn-group" role="group" aria-label="Basic example" id="btnId">
+                          <button class="btn card-green leitnerboxes leitnerboxesRevealed">Tomorrow</button>
+                          <button class="btn card-green leitnerboxes leitnerboxesRevealed">3 days</button>
+                          <button class="btn card-green leitnerboxes leitnerboxesRevealed">1 week</button>
+                          <button class="btn card-green leitnerboxes leitnerboxesRevealed">2 weeks</button>
+                          <button class="btn card-green leitnerboxes leitnerboxesRevealed">1 month</button>
+                          <button class="btn card-green leitnerboxes leitnerboxesRevealed">2 months</button>
+                          <button class="btn card-green leitnerboxes leitnerboxesRevealed">4 months</button>
+                        </div>
+                      </div>
+                    </div> <!-- Col that ends the leitnerboxes  -->
+                  </div> <!-- ends the leitnerboxes  -->
+                </div> <!-- Col  that ends the mainframe-->
+
+                </div>
                  <!-- Guess it's here we need mainframe 2  -->
               </div> <!-- Row  that ends the mainframe -->
 
-
+              <!-- Forms for the buttons -->
+              <div>
+              <form id="remembered" method="POST" action=" {% url 'remembered-from-study' card_id=card.id value=0 %} ">
+                  {% csrf_token %}
+                  <input type ="hidden">
+              </form>
+              </div>
+              <div>
+                <form id="didnotremember" method="POST" action=" {% url 'remembered-from-study' card_id=card.id value=1 %} ">
+                  {% csrf_token %}
+                  <input type ="hidden">
+                </form>
+              </div>
+              <!-- form for the buttons end  -->
+              {% empty %}
+                <p> No cards are due </p>
+                <p> Find new cards on the <a href="{% url 'spaced_repitition-home' %}"> feed </a> </p>
+                <p> Or go to <a href="{% url 'spaced_repitition-mypage' %}"> mypage </a> to create more cards </p>
           {% endfor %} <!-- For cards in cards reversed end -->
         </div> <!-- Inner Carrusel div ends -->
       </div> <!-- Carrusel div ends -->
   </div> <!-- Parent col ends -->
 </div> <!-- Parent row ends -->
+
+
+<script type="text/javascript">
+  function myFunction() {
+     var mainFrameOne = document.getElementById("mainFrameOne");
+     var mainFrameTwo = document.getElementById("mainFrameTwo");
+
+     mainFrameOne.style.display = (
+         mainFrameOne.style.display == "none" ? "block" : "none");
+     mainFrameTwo.style.display = (
+         mainFrameTwo.style.display == "none" ? "block" : "none");
+  }
+
+  // Leitnerbox functionality
+
+  // function getLeitnerbox() {
+  //    var actualLeitnerbox = document.getElementById("leitnerboxValue").innerHTML;
+  //  }
+
+
+  var actualLeitnerbox = 1;
+  var leitnerbox = actualLeitnerbox;
+
+  function rememberedHovered() {
+      leitnerbox += 1;
+      activate();
+  }
+
+  function rememberedNotHovered() {
+      leitnerbox = actualLeitnerbox;
+      activate();
+  }
+
+  function didNotRememberHovered() {
+      leitnerbox = 1;
+      activate();
+  }
+
+  function didNotRememberNotHovered() {
+      leitnerbox = actualLeitnerbox;
+      activate();
+  }
+  function activate(){
+  var header = document.getElementById("btnId");
+  var btns = header.getElementsByClassName("btn");
+  for(let i = 0; i < btns.length; i++){
+      btns[i].classList.remove("hovered");
+  }
+  for (var i = 0; i < leitnerbox; i++) {
+    btns[i].classList.add("hovered");
+    }
+  }
+  activate();
+</script>
+
+</body>
+
+<!-- This is my second attempt! -->
 
 </br>
 </br>
@@ -293,11 +398,11 @@
 
                             <div class="row mt-auto">
                               <div class="col button-margins">
-                                <a href="javascript:{document.getElementById('remembered').submit()}">
+                                <!-- <a href="javascript:{document.getElementById('remembered').submit()}"> -->
                                 <div onmouseover="mouseOver()" onmouseout="mouseOut()"class="align-self-end btn btn-success btn-answer-card btn-sm col-10 float-right text-right"> <img class = "super-small-picture float-left" src =" {% static '/my_icons/check6.png' %} "> Remembered </div> </a>
                               </div>
                               <div class="col button-margins">
-                                <a href="javascript:{document.getElementById('didnotremember').submit()}">
+                                <!-- <a href="javascript:{document.getElementById('didnotremember').submit()}"> -->
                                 <div class="align-self-end btn btn-danger btn-answer-card btn-sm col-10 float-left text-right "> <img class = "super-small-picture float-left" src ="{% static '/my_icons/refresh5.png' %}" > Didn't Remember </div> </a>
                               </div>
                             </div>
@@ -333,13 +438,10 @@
                           </div>
                         </div>
 
-
-
                     {% empty %}
                     <p> No cards are due </p>
                     <p> Find new cards on the <a href="{% url 'spaced_repitition-home' %}"> feed </a> </p>
                     <p> Or go to <a href="{% url 'spaced_repitition-mypage' %}"> mypage </a> to create more cards </p>
-
                 {% endfor %}
             </div>
         </div>
